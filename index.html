@@ -11,12 +11,15 @@
            =========================================== */
         
         /* RESET */
-        {
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
         
+        /* OCULTAR SCROLLBARS EN TODOS LOS NAVEGADORES */
+        *::-webkit-scrollbar { display: none; }
+        * { -ms-overflow-style: none; scrollbar-width: none; }
 
         /* BODY */
         body {
@@ -26,9 +29,9 @@
             background-size: cover;
             background-position: center;
             color: #ffffff;
-            min-height: 100vh;
-            overflow-x: hidden;
-            overflow-y: auto;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
             cursor: url('https://cur.cursors-4u.net/cursors/cur-13/cur1140.cur'), auto;;
         }
 
@@ -89,21 +92,17 @@
         .container {
             position: relative;
             z-index: 10;
-            min-height: 100vh;
-            height: auto;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
-            overflow: visible;
         }
 
         /* TARJETA DE VIDRIO */
         .glass-card {
             width: 95%; max-width: 1200px;
-            min-height: 85vh;
-            flex-wrap: wrap;
-            height: auto;
+            height: 85vh;
             background: rgba(255,255,255,0.08);
             backdrop-filter: blur(25px);
             border-radius: 25px;
@@ -115,10 +114,8 @@
             display: flex;
             overflow: hidden;
             position: relative;
-            
         }
 
-        
         .lightning-bolt {
     position: fixed;
     top: 0;
@@ -162,7 +159,6 @@
         /* BARRA LATERAL */
         .sidebar {
             width: 300px;
-            max-width: 100%;
             background: rgba(255,255,255,0.03);
             backdrop-filter: blur(15px);
             border-right: 1px solid rgba(255,255,255,0.08);
@@ -272,48 +268,26 @@
 
         /* CONTENIDO */
         .content-area {
-            padding: 50px;
+            flex: 1; padding: 50px;
             overflow-y: auto;
             position: relative; z-index: 15;
         }
-@media (max-width: 768px) {
-    .glass-card {
-        flex-direction: column;
-        height: 95vh;
-    }
 
-    .sidebar {
-        width: 100%;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-    }
+        .content-section {
+            display: none;
+            opacity: 0; transform: translateY(20px);
+            transition: all 0.4s ease;
+        }
 
-    .menu {
-        flex-direction: row;
-    }
-
-    .menu-btn {
-        flex: 1;
-    }
-
-    .content-area {
-        padding: 20px;
-    }
-}
+        .content-section.active {
+            display: block !important;
+            opacity: 1; transform: translateY(0);
+        }
 
         /* MÚSICA */
         .music-player { max-width: 500px; margin: 0 auto; text-align: center; }
         .music-cover {
-            width: 175px;
-            height: 175px;
-            max-width: 100%;
-            @media (max-width: 480px) {
-    .music-cover {
-        width: 120px;
-        height: 120px;
-    }
-}
+            width: 175px; height: 175px;
             border-radius: 20px;
             background: linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0.1));
             background: #000000 url('https://xatimg.com/image/ERP0zptxiilD.png') fixed;
@@ -362,36 +336,13 @@
 
         /* RESPONSIVE */
         @media (max-width: 768px) {
-@media (max-width: 768px) {
-
-    .glass-card {
-        flex-direction: column;
-        width: 100%;
-        height: auto;
-        min-height: 100dvh;
-    }
-
-    .sidebar {
-        width: 100%;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
-
-    .menu {
-        width: 100%;
-        flex-direction: column;
-    }
-
-    .menu-btn {
-        width: 100%;
-    }
-
-    .content-area {
-        width: 100%;
-        padding: 20px;
-    }
-}
+            .glass-card { flex-direction: column; height: 95vh; width: 98%; }
+            .sidebar { width: 100%; flex-direction: row; padding: 20px; justify-content: space-between; align-items: center; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); }
+            .profile-section { margin-right: 15px; margin-bottom: 0; }
+            .username { font-size: 24px; }
+            .menu { flex-direction: row; gap: 6px; }
+            .menu-btn { height: 44px; padding: 0 12px; font-size: 11px; flex: 1; min-width: 70px; }
+            .content-area { padding: 25px 20px; }
         }
 
         /*FRIENDS */
@@ -670,7 +621,7 @@
 </div>
 
 <audio id="musicPlayer" loop preload="auto">
-    <source src="Blessd.mp3" type="audio/mpeg">
+    <source src="MUSICA/Blessd.mp3.mp3" type="audio/mpeg">
 </audio>
                 </section>
             </main>
