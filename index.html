@@ -15,8 +15,12 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            overflow-x: hidden;
+            
         }
+
+        body {
+    overflow-x: hidden;
+}
         
         /* OCULTAR SCROLLBARS EN TODOS LOS NAVEGADORES */
         *::-webkit-scrollbar { display: none; }
@@ -102,22 +106,19 @@
         }
 
         /* TARJETA DE VIDRIO */
-        .glass-card {
-            width: 95%; max-width: 1200px;
-            min-height: 85vh;
-            background: rgba(255,255,255,0.08);
-            backdrop-filter: blur(25px);
-            border-radius: 25px;
-            border: 1px solid rgba(255,255,255,0.15);
-            box-shadow: 
-                0 25px 50px rgba(0,0,0,0.5),
-                0 0 0 1px rgba(255,255,255,0.1),
-                inset 0 1px 0 rgba(255,255,255,0.2);
-            display: flex;
-            overflow: hidden;
-            position: relative;
-            height: auto;
-        }
+.glass-card {
+    width: 95%;
+    max-width: 1200px;
+    min-height: 85vh;
+    height: auto; /* 🔥 IMPORTANTE */
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(25px);
+    border-radius: 25px;
+    border: 1px solid rgba(255,255,255,0.15);
+    display: flex;
+    overflow: hidden;
+    position: relative;
+}
 
         .lightning-bolt {
     position: fixed;
@@ -271,9 +272,10 @@
 
         /* CONTENIDO */
         .content-area {
-            flex: 1; padding: 50px;
+            flex: 1; 
+            padding: 50px;
             overflow-y: auto;
-            position: relative; z-index: 15;
+            
         }
 
         .content-section {
