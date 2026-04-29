@@ -30,20 +30,12 @@
             background-size: cover;
             background-position: center;
             color: #ffffff;
-            height: 100vh;
+            min-height: 100vh;
             overflow: visible;
             position:  sticky;
             cursor: url('https://cur.cursors-4u.net/cursors/cur-13/cur1140.cur'), auto;;
         }
 
-        /* Navegación */
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.5rem 0;
-    position: relative;
-}
 
         /* OVERLAY NEGRO PARA LEER */
         .overlay {
@@ -102,7 +94,7 @@ nav {
         .container {
             position: relative;
             z-index: 10;
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -112,7 +104,7 @@ nav {
         /* TARJETA DE VIDRIO */
         .glass-card {
             width: 95%; max-width: 1200px;
-            height: 85vh;
+            min-height: 85vh;
             background: rgba(255,255,255,0.08);
             backdrop-filter: blur(25px);
             border-radius: 25px;
@@ -124,6 +116,7 @@ nav {
             display: flex;
             overflow: hidden;
             position: relative;
+            height: auto;
         }
 
         .lightning-bolt {
