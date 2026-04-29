@@ -15,6 +15,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            overflow-x: hidden;
         }
         
         /* OCULTAR SCROLLBARS EN TODOS LOS NAVEGADORES */
@@ -30,10 +31,19 @@
             background-position: center;
             color: #ffffff;
             height: 100vh;
-            overflow: hidden;
-            position: relative;
+            overflow: visible;
+            position:  sticky;
             cursor: url('https://cur.cursors-4u.net/cursors/cur-13/cur1140.cur'), auto;;
         }
+
+        /* Navegación */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    position: relative;
+}
 
         /* OVERLAY NEGRO PARA LEER */
         .overlay {
