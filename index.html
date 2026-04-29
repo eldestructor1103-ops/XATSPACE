@@ -95,6 +95,7 @@
             justify-content: center;
             align-items: center;
             padding: 20px;
+            overflow: visible;
         }
 
         /* TARJETA DE VIDRIO */
@@ -351,13 +352,36 @@
 
         /* RESPONSIVE */
         @media (max-width: 768px) {
-            .glass-card { flex-direction: column; min-height: 95vh; width: 98%; }
-            .sidebar { width: 100%; flex-direction: row; padding: 20px; justify-content: space-between; align-items: center; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); }
-            .profile-section { margin-right: 15px; margin-bottom: 0; }
-            .username { font-size: 24px; }
-            .menu { flex-direction: row; gap: 6px; }
-            .menu-btn { height: 44px; padding: 0 12px; font-size: 11px; flex: 1; min-width: 70px; }
-            .content-area { padding: 25px 20px; }
+@media (max-width: 768px) {
+
+    .glass-card {
+        flex-direction: column;
+        width: 100%;
+        height: auto;
+        min-height: 100dvh;
+    }
+
+    .sidebar {
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .menu {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .menu-btn {
+        width: 100%;
+    }
+
+    .content-area {
+        width: 100%;
+        padding: 20px;
+    }
+}
         }
 
         /*FRIENDS */
