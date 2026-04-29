@@ -741,6 +741,15 @@ setInterval(() => {
     }
 }, 2000);
 
+        <script>
+document.addEventListener('click', function () {
+    const audio = document.getElementById('musicPlayer');
+    if (audio) {
+        audio.play().catch(() => {});
+    }
+});
+</script>
+
     </script>
 </body>
 </html>
