@@ -9,633 +9,618 @@
         /* ===========================================
            ESTILOS COMPLETOS - LIMPIOS Y ORGANIZADOS
            =========================================== */
-    /* RESET */
-    * body {
-        min-height: 100vh;
-        overflow-x: hidden;
-        overflow-y: auto;
-    }
-    
-    /* OCULTAR SCROLLBARS EN TODOS LOS NAVEGADORES */
-    *::-webkit-scrollbar { display: none; }
-    * { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        /* RESET */
+        * body {
+            min-height: 100vh;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+        
+        /* OCULTAR SCROLLBARS EN TODOS LOS NAVEGADORES */
+        *::-webkit-scrollbar { display: none; }
+        * { -ms-overflow-style: none; scrollbar-width: none; }
 
-    /* BODY */
-    body {
-        font-family: 'Inter', sans-serif;
-        background: #000000 url('https://xatimg.com/image/PJNEHGXnaO8T.jpg') fixed;
-        /* 🔥 CAMBIA TU GIF AQUÍ ↑ */
-        background-size: cover;
-        background-position: center;
-        color: #ffffff;
-        height: 100vh;
-        overflow: hidden;
-        position: relative;
-        cursor: url('https://cur.cursors-4u.net/cursors/cur-13/cur1140.cur'), auto;;
-    }
+        /* BODY */
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #000000 url('https://xatimg.com/image/PJNEHGXnaO8T.jpg') fixed;
+            /* 🔥 CAMBIA TU GIF AQUÍ ↑ */
+            background-size: cover;
+            background-position: center;
+            color: #ffffff;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+            cursor: url('https://cur.cursors-4u.net/cursors/cur-13/cur1140.cur'), auto;;
+        }
 
-    /* OVERLAY NEGRO PARA LEER */
-    .overlay {
-        position: fixed;
-        top: 0; left: 0;
-        width: 100%; height: 100%;
-        background: rgba(0,0,0,0.75);
-        backdrop-filter: blur(12px);
-        z-index: 1;
-    }
+        /* OVERLAY NEGRO PARA LEER */
+        .overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.75);
+            backdrop-filter: blur(12px);
+            z-index: 1;
+        }
 
-    /* GOTAS DE LLUVIA */
+        /* GOTAS DE LLUVIA */
 
 .rain {
-position: fixed;
-top: 0; left: 0;
-width: 100%; height: 100%;
-pointer-events: none;
-z-index: 2;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 2;
 }
-
 
 .drop {
-position: absolute;
-width: 2px;
-height: 20px;
-background: rgba(255,255,255,0.5);
-animation: rainFall linear infinite;
+    position: absolute;
+    width: 2px;
+    height: 20px;
+    background: rgba(255,255,255,0.5);
+    animation: rainFall linear infinite;
 }
-
 
 @keyframes rainFall {
-0% {
-transform: translateY(-100vh);
-opacity: 0;
-}
-10% { opacity: 1; }
-100% {
-transform: translateY(100vh);
-opacity: 0;
-}
+    0% {
+        transform: translateY(-100vh);
+        opacity: 0;
+    }
+    10% { opacity: 1; }
+    100% {
+        transform: translateY(100vh);
+        opacity: 0;
+    }
 }
 
-
-/RAYOS/
-
+/*RAYOS*/
 
 .lightning {
-position: fixed;
-top: 0; left: 0;
-width: 100%;
-height: 100%;
-background: white;
-opacity: 0;
-pointer-events: none;
-z-index: 3;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background: white;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 3;
 }
 
+        /* CONTENEDOR PRINCIPAL */
+        .container {
+            position: relative;
+            z-index: 10;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
 
-    /* CONTENEDOR PRINCIPAL */
-    .container {
-        position: relative;
-        z-index: 10;
-        min-height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 20px;
-    }
+        /* TARJETA DE VIDRIO */
+        .glass-card {
+            width: 95%; max-width: 1200px;
+            min-height: 85vh;
+            height: auto;
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(25px);
+            border-radius: 25px;
+            border: 1px solid rgba(255,255,255,0.15);
+            box-shadow: 
+                0 25px 50px rgba(0,0,0,0.5),
+                0 0 0 1px rgba(255,255,255,0.1),
+                inset 0 1px 0 rgba(255,255,255,0.2);
+            display: flex;
+            overflow: hidden;
+            position: relative;
+        }
 
-    /* TARJETA DE VIDRIO */
-    .glass-card {
-        width: 95%; max-width: 1200px;
-        min-height: 85vh;
-        height: auto;
-        background: rgba(255,255,255,0.08);
-        backdrop-filter: blur(25px);
-        border-radius: 25px;
-        border: 1px solid rgba(255,255,255,0.15);
-        box-shadow: 
-            0 25px 50px rgba(0,0,0,0.5),
-            0 0 0 1px rgba(255,255,255,0.1),
-            inset 0 1px 0 rgba(255,255,255,0.2);
-        display: flex;
-        overflow: hidden;
-        position: relative;
-    }
-
-    .lightning-bolt {
-position: fixed;
-top: 0;
-left: 50%;
-width: 4px;
-height: 100%;
-background: linear-gradient(to bottom, 
-    transparent 0%, 
-    white 20%, 
-    white 80%, 
-    transparent 100%);
-box-shadow: 
-    0 0 20px white,
-    0 0 40px white,
-    0 0 80px white;
-opacity: 0;
-transform: translateX(-50%);
-pointer-events: none;
-z-index: 5;
-
+        .lightning-bolt {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(to bottom, 
+        transparent 0%, 
+        white 20%, 
+        white 80%, 
+        transparent 100%);
+    box-shadow: 
+        0 0 20px white,
+        0 0 40px white,
+        0 0 80px white;
+    opacity: 0;
+    transform: translateX(-50%);
+    pointer-events: none;
+    z-index: 5;
 }
 
+        /* BORDE BRILLANTE ANIMADO */
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            background: linear-gradient(45deg, 
+                rgba(255,255,255,0.4), 
+                rgba(255,255,255,0.1), 
+                rgba(255,255,255,0.4));
+            border-radius: 27px;
+            z-index: -1;
+            animation: glowPulse 4s ease-in-out infinite alternate;
+            filter: blur(6px);
+        }
+        @keyframes glowPulse {
+            0% { opacity: 0.6; transform: scale(1); }
+            100% { opacity: 1; transform: scale(1.02); }
+        }
 
-    /* BORDE BRILLANTE ANIMADO */
-    .glass-card::before {
-        content: '';
-        position: absolute;
-        inset: -2px;
-        background: linear-gradient(45deg, 
-            rgba(255,255,255,0.4), 
-            rgba(255,255,255,0.1), 
-            rgba(255,255,255,0.4));
-        border-radius: 27px;
-        z-index: -1;
-        animation: glowPulse 4s ease-in-out infinite alternate;
-        filter: blur(6px);
-    }
-    @keyframes glowPulse {
-        0% { opacity: 0.6; transform: scale(1); }
-        100% { opacity: 1; transform: scale(1.02); }
-    }
+        /* BARRA LATERAL */
+        .sidebar {
+            width: 280px;
+            max-width: 100%;
+            background: rgba(255,255,255,0.03);
+            backdrop-filter: blur(15px);
+            border-right: 1px solid rgba(255,255,255,0.08);
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+            z-index: 20;
+        }
 
-    /* BARRA LATERAL */
-    .sidebar {
-        width: 280px;
-        max-width: 100%;
-        background: rgba(255,255,255,0.03);
-        backdrop-filter: blur(15px);
-        border-right: 1px solid rgba(255,255,255,0.08);
-        padding: 25px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        height: 100%;
-        z-index: 20;
-    }
+        .profile-section {
+            text-align: center;
+            margin-bottom: 20px;
+            flex-shrink: 0;
+        }
 
-    .profile-section {
-        text-align: center;
-        margin-bottom: 20px;
-        flex-shrink: 0;
-    }
+        .profile-img {
+            width: 85px; height: 85px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.3), rgba(255,255,255,0.1));
+            border: 2px solid rgba(255,255,255,0.3);
+            margin: 0 auto 12px;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
 
-    .profile-img {
-        width: 85px; height: 85px;
-        border-radius: 50%;
-        background: linear-gradient(135deg, rgba(255,255,255,0.3), rgba(255,255,255,0.1));
-        border: 2px solid rgba(255,255,255,0.3);
-        margin: 0 auto 12px;
-        position: relative;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        overflow: hidden;
-    }
+        .profile-img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px rgba(255,255,255,0.4);
+        }
 
-    .profile-img:hover {
-        transform: scale(1.05);
-        box-shadow: 0 0 25px rgba(255,255,255,0.4);
-    }
+        .profile-img img {
+            width: 100%; height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
 
-    .profile-img img {
-        width: 100%; height: 100%;
-        border-radius: 50%;
-        object-fit: cover;
-    }
+        .username {
+            font-family: 'Dancing Script', cursive;
+            font-size: 32px; font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 4px;
+            text-shadow: 0 0 15px rgba(255,255,255,0.5);
+        }
 
-    .username {
-        font-family: 'Dancing Script', cursive;
-        font-size: 32px; font-weight: 700;
-        color: #ffffff;
-        margin-bottom: 4px;
-        text-shadow: 0 0 15px rgba(255,255,255,0.5);
-    }
+        .user-id {
+            font-size: 11px;
+            color: rgba(255,255,255,0.6);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
 
-    .user-id {
-        font-size: 11px;
-        color: rgba(255,255,255,0.6);
-        letter-spacing: 2px;
-        text-transform: uppercase;
-    }
+        /* MENÚ */
+        .menu {
+            display: flex; flex-direction: column;
+            gap: 10px; flex: 1;
+        }
 
-    /* MENÚ */
-    .menu {
-        display: flex; flex-direction: column;
-        gap: 10px; flex: 1;
-    }
+        .menu-btn {
+            width: 100%; height: 52px;
+            padding: 0 18px;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 14px;
+            color: rgba(255,255,255,0.85);
+            font-size: 13px; font-weight: 500;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+            display: flex; align-items: center;
+            flex-shrink: 0;
+            z-index: 25;
+            position: relative;
+            overflow: hidden;
+        }
 
-    .menu-btn {
-        width: 100%; height: 52px;
-        padding: 0 18px;
-        background: rgba(255,255,255,0.02);
-        border: 1px solid rgba(255,255,255,0.12);
-        border-radius: 14px;
-        color: rgba(255,255,255,0.85);
-        font-size: 13px; font-weight: 500;
-        letter-spacing: 0.8px;
-        text-transform: uppercase;
-        cursor: pointer;
-        transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
-        display: flex; align-items: center;
-        flex-shrink: 0;
-        z-index: 25;
-        position: relative;
-        overflow: hidden;
-    }
+        .menu-btn::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+            transition: left 0.6s;
+        }
 
-    .menu-btn::before {
-        content: '';
-        position: absolute;
-        top: 0; left: -100%;
-        width: 100%; height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
-        transition: left 0.6s;
-    }
+        .menu-btn:hover {
+            background: rgba(255,255,255,0.12);
+            border-color: rgba(255,255,255,0.4);
+            color: #ffffff;
+            transform: translateX(4px);
+            box-shadow: 0 8px 25px rgba(255,255,255,0.2);
+        }
 
-    .menu-btn:hover {
-        background: rgba(255,255,255,0.12);
-        border-color: rgba(255,255,255,0.4);
-        color: #ffffff;
-        transform: translateX(4px);
-        box-shadow: 0 8px 25px rgba(255,255,255,0.2);
-    }
+        .menu-btn:hover::before { left: 100%; }
 
-    .menu-btn:hover::before { left: 100%; }
+        .menu-btn.active {
+            background: rgba(255,255,255,0.18) !important;
+            border-color: rgba(255,255,255,0.6) !important;
+            color: #ffffff !important;
+            box-shadow: 0 0 20px rgba(255,255,255,0.35), 0 6px 20px rgba(255,255,255,0.15) !important;
+            transform: scale(1.01);
+        }
 
-    .menu-btn.active {
-        background: rgba(255,255,255,0.18) !important;
-        border-color: rgba(255,255,255,0.6) !important;
-        color: #ffffff !important;
-        box-shadow: 0 0 20px rgba(255,255,255,0.35), 0 6px 20px rgba(255,255,255,0.15) !important;
-        transform: scale(1.01);
-    }
+        /* CONTENIDO */
+        .content-area {
+            flex: 1; padding: 50px;
+            overflow-y: auto;
+            position: relative; z-index: 15;
+        }
 
-    /* CONTENIDO */
-    .content-area {
-        flex: 1; padding: 50px;
-        overflow-y: auto;
-        position: relative; z-index: 15;
-    }
+        .content-section {
+            display: none;
+            opacity: 0; transform: translateY(20px);
+            transition: all 0.4s ease;
+        }
 
-    .content-section {
-        display: none;
-        opacity: 0; transform: translateY(20px);
-        transition: all 0.4s ease;
-    }
+        .content-section.active {
+            display: block !important;
+            opacity: 1; transform: translateY(0);
+        }
 
-    .content-section.active {
-        display: block !important;
-        opacity: 1; transform: translateY(0);
-    }
+        /* MÚSICA */
+        .music-player { max-width: 500px; margin: 0 auto; text-align: center; }
+        .music-cover {
+            width: 175px; height: 175px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0.1));
+            background: #000000 url('https://xatimg.com/image/ERP0zptxiilD.png') fixed;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            margin: 0 auto 30px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 80px;
+            animation: rotateCover 20s linear infinite paused;
+            border: 2px solid rgba(255,255,255,0.3);
+            transition: all 0.3s ease;
+        }
+        .music-cover.playing { animation-play-state: running; }
+        @keyframes rotateCover {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .music-controls {
+            display: flex; align-items: center;
+            justify-content: center; gap: 25px;
+            margin-bottom: 25px;
+        }
+        .control-btn {
+            width: 60px; height: 60px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.25);
+            border: 2px solid rgba(255,255,255,0.4);
+            color: #ffffff; font-size: 24px;
+            cursor: pointer; transition: all 0.3s ease;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .control-btn:hover {
+            background: rgba(255,255,255,0.4);
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(255,255,255,0.4);
+        }
 
-    /* MÚSICA */
-    .music-player { max-width: 500px; margin: 0 auto; text-align: center; }
-    .music-cover {
-        width: 175px; height: 175px;
-        border-radius: 20px;
-        background: linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0.1));
-        background: #000000 url('https://xatimg.com/image/ERP0zptxiilD.png') fixed;
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position: center;
-        margin: 0 auto 30px;
-        display: flex; align-items: center; justify-content: center;
-        font-size: 80px;
-        animation: rotateCover 20s linear infinite paused;
-        border: 2px solid rgba(255,255,255,0.3);
-        transition: all 0.3s ease;
-    }
-    .music-cover.playing { animation-play-state: running; }
-    @keyframes rotateCover {
-        from { transform: rotate(0deg); }
-        to { transform: rotate(360deg); }
-    }
-    .music-controls {
-        display: flex; align-items: center;
-        justify-content: center; gap: 25px;
-        margin-bottom: 25px;
-    }
-    .control-btn {
-        width: 60px; height: 60px;
-        border-radius: 50%;
-        background: rgba(255,255,255,0.25);
-        border: 2px solid rgba(255,255,255,0.4);
-        color: #ffffff; font-size: 24px;
-        cursor: pointer; transition: all 0.3s ease;
-        display: flex; align-items: center; justify-content: center;
-    }
-    .control-btn:hover {
-        background: rgba(255,255,255,0.4);
-        transform: scale(1.1);
-        box-shadow: 0 0 20px rgba(255,255,255,0.4);
-    }
+        /* OCULTAR REPRODUCTORES */
+        #musicPlayer, #youtubePlayer {
+            position: absolute !important;
+            left: -9999px !important;
+            width: 1px !important; height: 1px !important;
+            opacity: 0 !important; visibility: hidden !important;
+        }
 
-    /* OCULTAR REPRODUCTORES */
-    #musicPlayer, #youtubePlayer {
-        position: absolute !important;
-        left: -9999px !important;
-        width: 1px !important; height: 1px !important;
-        opacity: 0 !important; visibility: hidden !important;
-    }
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .glass-card { flex-direction: column; height: 95vh; width: 98%; }
+            .sidebar { width: 100%; flex-direction: row; padding: 20px; justify-content: space-between; align-items: center; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); }
+            .profile-section { margin-right: 15px; margin-bottom: 0; }
+            .username { font-size: 24px; }
+            .menu { flex-direction: row; gap: 6px; }
+            .menu-btn { height: 44px; padding: 0 12px; font-size: 11px; flex: 1; min-width: 70px; }
+            .content-area { padding: 25px 20px; }
+        }
 
-    /* RESPONSIVE */
-    @media (max-width: 768px) {
-        .glass-card { flex-direction: column; height: 95vh; width: 98%; }
-        .sidebar { width: 100%; flex-direction: row; padding: 20px; justify-content: space-between; align-items: center; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); }
-        .profile-section { margin-right: 15px; margin-bottom: 0; }
-        .username { font-size: 24px; }
-        .menu { flex-direction: row; gap: 6px; }
-        .menu-btn { height: 44px; padding: 0 12px; font-size: 11px; flex: 1; min-width: 70px; }
-        .content-area { padding: 25px 20px; }
-    }
+        /*FRIENDS */
 
-    /*FRIENDS */
-
-    .friend-item {
-display: flex;
-align-items: center;
-padding: 20px;
-background: rgba(255,255,255,0.05);
-border-radius: 12px;
-margin-bottom: 12px;
-transition: all 0.3s ease;
-cursor: pointer;
-
+        .friend-item {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 12px;
+    margin-bottom: 12px;
+    transition: all 0.3s ease;
+    cursor: pointer;
 }
-
 
 .friend-item:hover {
-background: rgba(255,255,255,0.15);
-transform: translateX(8px) scale(1.02);
-box-shadow: 0 0 20px rgba(255,255,255,0.3);
+    background: rgba(255,255,255,0.15);
+    transform: translateX(8px) scale(1.02);
+    box-shadow: 0 0 20px rgba(255,255,255,0.3);
 }
-
 
 .friend-avatar {
-width: 50px;
-height: 50px;
-border-radius: 50%;
-background: rgba(255,255,255,0.3);
-margin-right: 15px;
-transition: all 0.3s ease;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.3);
+    margin-right: 15px;
+    transition: all 0.3s ease;
 }
-
 
 .friend-item:hover .friend-avatar {
-transform: scale(1.1);
-box-shadow: 0 0 15px rgba(255,255,255,0.6);
-}
-
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(255,255,255,0.6);
+} 
 
 /* BANDERAS CONTACTO */
 .friend-country {
-display: flex;
-align-items: center;
-gap: 8px;
-font-size: 13px;
-color: rgba(255,255,255,0.7);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.7);
 }
-
 
 .friend-country img {
-width: 20px;
-height: 14px;
-border-radius: 3px;
-transition: transform 0.3s ease;
+    width: 20px;
+    height: 14px;
+    border-radius: 3px;
+    transition: transform 0.3s ease;
 }
-
 
 .friend-item:hover .friend-country img {
-transform: scale(1.2);
+    transform: scale(1.2);
 }
 
-
-/* IMGANGES AVATAR AMIGOS */
-
+/* IMGANGES AVATAR AMIGOS */ 
 
 .friend-avatar {
-width: 50px;
-height: 50px;
-border-radius: 50%;
-margin-right: 15px;
-overflow: hidden; /* 🔥 IMPORTANTE */
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 15px;
+    overflow: hidden; /* 🔥 IMPORTANTE */
 }
-
 
 .friend-avatar img {
-width: 100%;
-height: 100%;
-object-fit: cover;
-display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }
-
 
 /* EFECTOS GALAREIA */
 
-
 .img-hover {
-height: 200px;
-border-radius: 15px;
-overflow: hidden;
-position: relative;
+    height: 200px;
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
 
-
-transition: transform 0.3s ease, box-shadow 0.3s ease;
-
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-
 
 /* FONDO (NO SE ESCALA) */
 .img-bg {
-position: absolute;
-inset: 0;
-background-size: cover;
-background-position: center;
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
 }
-
 
 /* 🔥 SOLO CRECE EL CUADRO */
 .img-hover:hover {
-transform: scale(1.05);
-box-shadow: 0 15px 40px rgba(255,255,255,0.25);
+    transform: scale(1.05);
+    box-shadow: 0 15px 40px rgba(255,255,255,0.25);
 }
 
-
-</style>
-
+    </style>
 </head>
 <body>
     <!-- OVERLAY -->
     <div class="overlay"></div>
-<!-- PARTICULAS -->
-<div class="rain" id="rain"></div>
-<div class="lightning" id="lightning"></div>
-<div class="lightning-bolt" id="bolt"></div>
+    
+    <!-- PARTICULAS -->
+    <div class="rain" id="rain"></div>
+    <div class="lightning" id="lightning"></div>
+    <div class="lightning-bolt" id="bolt"></div>
 
-<!-- CONTENEDOR -->
-<div class="container">
-    <div class="glass-card">
-        <!-- SIDEBAR -->
-        <div class="sidebar">
-            <!-- PERFIL -->
-            <div class="profile-section">
-                <!-- 👤 CAMBIA TU FOTO: -->
-                <div class="profile-img">
-                    <img src="https://xatimg.com/image/PJNEHGXnaO8T.jpg" alt="Jhojan">
-                </div>
-                <!-- ✏️ NOMBRE: -->
-                <div class="username">Jhojan</div>
-                <div class="user-id">(1527592733)</div>
-            </div>
-            
-            <!-- MENÚ -->
-            <nav class="menu">
-                <button class="menu-btn active" data-target="profile">Perfil</button>
-                <button class="menu-btn" data-target="gallery">Galería</button>
-                <button class="menu-btn" data-target="friends">Amigos</button>
-                <button class="menu-btn" data-target="music">Música</button>
-            </nav>
-        </div>
-
-        <!-- CONTENIDO -->
-        <main class="content-area">
-            <!-- PERFIL -->
-            <section id="profile" class="content-section active">
-                <div style="display: flex; gap: 30px; align-items: center; flex-wrap: wrap;">
-                    <div class="profile-img" style="width: 150px; height: 150px;">
-                        <img src="https://xatimg.com/image/kuEWaHkJCVcR.gif">
+    <!-- CONTENEDOR -->
+    <div class="container">
+        <div class="glass-card">
+            <!-- SIDEBAR -->
+            <div class="sidebar">
+                <!-- PERFIL -->
+                <div class="profile-section">
+                    <!-- 👤 CAMBIA TU FOTO: -->
+                    <div class="profile-img">
+                        <img src="https://xatimg.com/image/PJNEHGXnaO8T.jpg" alt="Jhojan">
                     </div>
-                    
-                    <div>
-                        <h2 style="font-family: 'Dancing Script', cursive; font-size: 28px;">Sobre mí</h2>
+                    <!-- ✏️ NOMBRE: -->
+                    <div class="username">Jhojan</div>
+                    <div class="user-id">(1527592733)</div>
+                </div>
+                
+                <!-- MENÚ -->
+                <nav class="menu">
+                    <button class="menu-btn active" data-target="profile">Perfil</button>
+                    <button class="menu-btn" data-target="gallery">Galería</button>
+                    <button class="menu-btn" data-target="friends">Amigos</button>
+                    <button class="menu-btn" data-target="music">Música</button>
+                </nav>
+            </div>
 
+            <!-- CONTENIDO -->
+            <main class="content-area">
+                <!-- PERFIL -->
+                <section id="profile" class="content-section active">
+                    <div style="display: flex; gap: 30px; align-items: center; flex-wrap: wrap;">
+                        <div class="profile-img" style="width: 150px; height: 150px;">
+                            <img src="https://xatimg.com/image/kuEWaHkJCVcR.gif">
+                        </div>
+                        
+                        <div>
+                            <h2 style="font-family: 'Dancing Script', cursive; font-size: 28px;">Sobre mí</h2>
 <p>
-</span><br>
-Colombiano, 24 años, Ingeniero de Sistemas.<br>
-Apasionado por la tecnología, el aprendizaje constante y la construcción de soluciones que generen impacto.
 
-</p>
-<p style="margin-top: 15px; font-style: italic;">
-    "Los sueños no tienen fecha de vencimiento, pero sí requieren decisión: piensa en grande, trabaja en silencio y deja que los resultados hablen por ti."
+    </span><br>
+    Colombiano, 24 años, Ingeniero de Sistemas.<br>
+    Apasionado por la tecnología, el aprendizaje constante y la construcción de soluciones que generen impacto.
 </p>
 
+    <p style="margin-top: 15px; font-style: italic;">
+        "Los sueños no tienen fecha de vencimiento, pero sí requieren decisión: piensa en grande, trabaja en silencio y deja que los resultados hablen por ti."
+    </p>
 </div>
                 </section>
-            <!-- GALERÍA -->
-            <section id="gallery" class="content-section">
-                <h2 style="font-size: 32px; margin-bottom: 30px; text-align: center;">Mi Galería</h2>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+
+                <!-- GALERÍA -->
+                <section id="gallery" class="content-section">
+                    <h2 style="font-size: 32px; margin-bottom: 30px; text-align: center;">Mi Galería</h2>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+
 
    <!-- IMAGEN 1 -->                    
 <div class="img-hover">
 <div class="img-bg" style="background-image: url('https://xatimg.com/image/T1lHJlKsEeDR.jpg');"></div>
 </div>
+       
   <!-- IMAGEN 2 -->                     
 <div class="img-hover">
 <div class="img-bg" style="background-image: url('https://xatimg.com/image/CQdC8EBk9t1d.jpg');"></div>
 </div>
+
 <!-- IMAGEN 3 -->
 <div class="img-hover">
 <div class="img-bg" style="background-image: url('https://xatimg.com/image/5qCcwD6W3mTj.jpg');"></div>
 </div>
+
 </div>
+                
 </section>
+
 <!-- AMIGOS -->
 <section id="friends" class="content-section">
     <h2 style="font-size: 32px; margin-bottom: 30px;">Amigos</h2>
-<div style="max-height: 400px; overflow-y: auto;">
 
-    <!-- AMIGO 1 -->
-    <div class="friend-item">
-        <div class="friend-avatar">
-            <img src="https://i0.xat.com/web_gear/chat/GetImage9.php?s&W=80&H=80&U=https://xatimg.com/image/kahvvqmoifdm.png">
+    <div style="max-height: 400px; overflow-y: auto;">
+
+        <!-- AMIGO 1 -->
+        <div class="friend-item">
+            <div class="friend-avatar">
+                <img src="https://i0.xat.com/web_gear/chat/GetImage9.php?s&W=80&H=80&U=https://xatimg.com/image/kahvvqmoifdm.png">
+            </div>
+            <div>
+                <h4>.𝓂ⓐⓡｂ𝐄𝓛𝓛ⓐ.</h4>
+                <div class="friend-country">
+                    <img src="https://flagcdn.com/w40/mx.png">
+                    México
+                </div>
+            </div>
         </div>
-        <div>
-            <h4>.𝓂ⓐⓡｂ𝐄𝓛𝓛ⓐ.</h4>
-            <div class="friend-country">
-                <img src="https://flagcdn.com/w40/mx.png">
-                México
+
+        <!-- AMIGO 2 -->
+        <div class="friend-item">
+            <div class="friend-avatar">
+                <img src="https://i0.xat.com/web_gear/chat/GetImage9.php?s&W=80&H=80&U=https://xatimg.com/image/epxmXIHpqNUI.png">
+            </div>
+            <div>
+                <h4>𝓛𝓘𝓝𝓓𝓐</h4>
+                <div class="friend-country">
+                    <img src="https://flagcdn.com/w40/cl.png">
+                    Chile
+                </div>
+            </div>
+        </div>
+
+        <!-- AMIGO 3 -->
+        <div class="friend-item">
+            <div class="friend-avatar">
+                <img src="https://i0.xat.com/web_gear/chat/GetImage9.php?s&W=80&H=80&U=https://xatimg.com/image/5KHrnP2u96ba.png">
+            </div>
+            <div>
+                <h4>Rosii</h4>
+                <div class="friend-country">
+                    <img src="https://flagcdn.com/w40/co.png">
+                    Colombia
+                </div>
+            </div>
+        </div>
+
+
+        <!-- AMIGO 4 -->
+        <div class="friend-item">
+            <div class="friend-avatar">
+                <img src="https://xatimg.com/image/nCm17e4kNKqM.jpg">
+            </div>
+            <div>
+                <h4>ᴍɪᴍɪ ꕥ</h4>
+                <div class="friend-country">
+                    <img src="https://flagcdn.com/w40/mx.png">
+                    México
+                </div>
+            </div>
+        </div>
+
+        <!-- AMIGO 5 -->
+        <div class="friend-item">
+            <div class="friend-avatar">
+                <img src="https://i0.xat.com/web_gear/chat/GetImage9.php?s&W=80&H=80&U=https://xatimg.com/image/7xbCxiPFWL7S.png">
+            </div>
+            <div>
+                <h4>𝙂𝙖𝙗𝙧</h4>
+                <div class="friend-country">
+                    <img src="https://flagcdn.com/w40/br.png">
+                    Brasil
+                </div>
             </div>
         </div>
     </div>
-
-    <!-- AMIGO 2 -->
-    <div class="friend-item">
-        <div class="friend-avatar">
-            <img src="https://i0.xat.com/web_gear/chat/GetImage9.php?s&W=80&H=80&U=https://xatimg.com/image/epxmXIHpqNUI.png">
-        </div>
-        <div>
-            <h4>𝓛𝓘𝓝𝓓𝓐</h4>
-            <div class="friend-country">
-                <img src="https://flagcdn.com/w40/cl.png">
-                Chile
-            </div>
-        </div>
-    </div>
-
-    <!-- AMIGO 3 -->
-    <div class="friend-item">
-        <div class="friend-avatar">
-            <img src="https://i0.xat.com/web_gear/chat/GetImage9.php?s&W=80&H=80&U=https://xatimg.com/image/5KHrnP2u96ba.png">
-        </div>
-        <div>
-            <h4>Rosii</h4>
-            <div class="friend-country">
-                <img src="https://flagcdn.com/w40/co.png">
-                Colombia
-            </div>
-        </div>
-    </div>
-
-
-    <!-- AMIGO 4 -->
-    <div class="friend-item">
-        <div class="friend-avatar">
-            <img src="https://xatimg.com/image/nCm17e4kNKqM.jpg">
-        </div>
-        <div>
-            <h4>ᴍɪᴍɪ ꕥ</h4>
-            <div class="friend-country">
-                <img src="https://flagcdn.com/w40/mx.png">
-                México
-            </div>
-        </div>
-    </div>
-
-    <!-- AMIGO 5 -->
-    <div class="friend-item">
-        <div class="friend-avatar">
-            <img src="https://i0.xat.com/web_gear/chat/GetImage9.php?s&W=80&H=80&U=https://xatimg.com/image/7xbCxiPFWL7S.png">
-        </div>
-        <div>
-            <h4>𝙂𝙖𝙗𝙧</h4>
-            <div class="friend-country">
-                <img src="https://flagcdn.com/w40/br.png">
-                Brasil
-            </div>
-        </div>
-    </div>
-</div>
 
 </section>
-            <!-- MÚSICA -->
-            <section id="music" class="content-section">
-                <div class="music-player">
-                    <div class="music-cover playing" id="musicCover">🎵</div>
-                    <div class="music-controls">
-                        <button class="control-btn" id="prevBtn">⏮</button>
-                        <button class="control-btn" id="playPauseBtn">⏸</button>
-                        <button class="control-btn" id="nextBtn">⏭</button>
-                    </div>
-                    <div class="music-info">
-<h3>HOLA QUE TAL | BLESSD ❌ MYKE TOWERS</h3>
-<p>Reproduciendo automáticamente...</p>
 
+                <!-- MÚSICA -->
+                <section id="music" class="content-section">
+                    <div class="music-player">
+                        <div class="music-cover playing" id="musicCover">🎵</div>
+                        <div class="music-controls">
+                            <button class="control-btn" id="prevBtn">⏮</button>
+                            <button class="control-btn" id="playPauseBtn">⏸</button>
+                            <button class="control-btn" id="nextBtn">⏭</button>
+                        </div>
+                        <div class="music-info">
+    <h3>HOLA QUE TAL | BLESSD ❌ MYKE TOWERS</h3>
+    <p>Reproduciendo automáticamente...</p>
 </div>
+
 <audio id="musicPlayer" loop preload="auto">
     <source src="Blessd.mp3" type="audio/mpeg">
 </audio>
@@ -643,126 +628,120 @@ Apasionado por la tecnología, el aprendizaje constante y la construcción de so
             </main>
         </div>
     </div>
-<script>
 
-    
-    /* ===========================================
-       JAVASCRIPT COMPLETO - TODO FUNCIONA
-       =========================================== */
+    <script>
 
-    document.addEventListener('DOMContentLoaded', function() {
-        // 🎛️ MENÚ NAVEGACIÓN
-        const menuBtns = document.querySelectorAll('.menu-btn');
-        const sections = document.querySelectorAll('.content-section');
+        
+        /* ===========================================
+           JAVASCRIPT COMPLETO - TODO FUNCIONA
+           =========================================== */
 
-        function showSection(targetId) {
-            sections.forEach(s => s.classList.remove('active'));
-            menuBtns.forEach(b => b.classList.remove('active'));
-            document.getElementById(targetId)?.classList.add('active');
-            event.target.classList.add('active');
-        }
+        document.addEventListener('DOMContentLoaded', function() {
+            // 🎛️ MENÚ NAVEGACIÓN
+            const menuBtns = document.querySelectorAll('.menu-btn');
+            const sections = document.querySelectorAll('.content-section');
 
-        menuBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                showSection(btn.dataset.target);
-            });
-        });
-
-        // 🎵 REPRODUCTOR MÚSICA PERFECCIONADO
-        const audio = document.getElementById('musicPlayer');
-        const playBtn = document.getElementById('playPauseBtn');
-        const cover = document.getElementById('musicCover');
-        let isPlaying = false;
-
-        if (audio) {
-            audio.volume = 0.3;
-            audio.loop = true;
-
-            // AUTOPLAY MÚLTIPLE
-            function playMusic() {
-                audio.play().then(() => {
-                    isPlaying = true;
-                    cover.classList.add('playing');
-                    playBtn.textContent = '⏸';
-                }).catch(e => console.log('Autoplay bloqueado'));
+            function showSection(targetId) {
+                sections.forEach(s => s.classList.remove('active'));
+                menuBtns.forEach(b => b.classList.remove('active'));
+                document.getElementById(targetId)?.classList.add('active');
+                event.target.classList.add('active');
             }
 
-            // 1. Intentar inmediatamente
-            playMusic();
-
-            // 2. Primer click
-            document.addEventListener('click', playMusic, { once: true });
-
-            // 3. Al abrir música
-            document.getElementById('music').addEventListener('transitionend', () => {
-                if (document.getElementById('music').classList.contains('active')) {
-                    setTimeout(playMusic, 300);
-                }
+            menuBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    showSection(btn.dataset.target);
+                });
             });
 
-            // 4. Botón manual
-            playBtn.addEventListener('click', () => {
-                if (isPlaying) {
-                    audio.pause();
-                    isPlaying = false;
-                    cover.classList.remove('playing');
-                    playBtn.textContent = '▶';
-                } else {
-                    playMusic();
-                }
-            });
-        }
+            // 🎵 REPRODUCTOR MÚSICA PERFECCIONADO
+            const audio = document.getElementById('musicPlayer');
+            const playBtn = document.getElementById('playPauseBtn');
+            const cover = document.getElementById('musicCover');
+            let isPlaying = false;
 
-        // ✨ Gotas de lluvia
-      const rain = document.getElementById('rain');
+            if (audio) {
+                audio.volume = 0.3;
+                audio.loop = true;
+
+                // AUTOPLAY MÚLTIPLE
+                function playMusic() {
+                    audio.play().then(() => {
+                        isPlaying = true;
+                        cover.classList.add('playing');
+                        playBtn.textContent = '⏸';
+                    }).catch(e => console.log('Autoplay bloqueado'));
+                }
+
+                // 1. Intentar inmediatamente
+                playMusic();
+
+                // 2. Primer click
+                document.addEventListener('click', playMusic, { once: true });
+
+                // 3. Al abrir música
+                document.getElementById('music').addEventListener('transitionend', () => {
+                    if (document.getElementById('music').classList.contains('active')) {
+                        setTimeout(playMusic, 300);
+                    }
+                });
+
+                // 4. Botón manual
+                playBtn.addEventListener('click', () => {
+                    if (isPlaying) {
+                        audio.pause();
+                        isPlaying = false;
+                        cover.classList.remove('playing');
+                        playBtn.textContent = '▶';
+                    } else {
+                        playMusic();
+                    }
+                });
+            }
+
+            // ✨ Gotas de lluvia
+          const rain = document.getElementById('rain');
 
 for (let i = 0; i < 200; i++) {
-const drop = document.createElement('div');
-drop.className = 'drop';
-drop.style.left = Math.random() * 100 + '%';
-drop.style.animationDuration = (Math.random() * 1 + 0.5) + 's';
-drop.style.animationDelay = Math.random() * 2 + 's';
-rain.appendChild(drop);
+    const drop = document.createElement('div');
+    drop.className = 'drop';
+    drop.style.left = Math.random() * 100 + '%';
+    drop.style.animationDuration = (Math.random() * 1 + 0.5) + 's';
+    drop.style.animationDelay = Math.random() * 2 + 's';
+    rain.appendChild(drop);
 }
-});
+        });
 
-
+     
 document.addEventListener('contextmenu', function(e) {
-e.preventDefault();
+    e.preventDefault();
 });
-
 
 const lightning = document.getElementById('lightning');
 
-
 function flashLightning() {
-lightning.style.opacity = 0.8;
+    lightning.style.opacity = 0.8;
 
-
-setTimeout(() => {
-    lightning.style.opacity = 0;
-}, 100);
-
-// segundo flash (realista)
-setTimeout(() => {
-    lightning.style.opacity = 0.6;
     setTimeout(() => {
         lightning.style.opacity = 0;
-    }, 80);
-}, 150);
+    }, 100);
 
+    // segundo flash (realista)
+    setTimeout(() => {
+        lightning.style.opacity = 0.6;
+        setTimeout(() => {
+            lightning.style.opacity = 0;
+        }, 80);
+    }, 150);
 }
-
 
 // rayos aleatorios
 setInterval(() => {
-if (Math.random() > 0.7) {
-flashLightning();
-}
+    if (Math.random() > 0.7) {
+        flashLightning();
+    }
 }, 2000);
 
-
-</script>
-
+    </script>
 </body>
 </html>
