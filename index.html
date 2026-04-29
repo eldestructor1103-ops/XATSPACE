@@ -113,7 +113,7 @@
                 0 0 0 1px rgba(255,255,255,0.1),
                 inset 0 1px 0 rgba(255,255,255,0.2);
             display: flex;
-            overflow: hidden auto;
+            overflow: hidden;
             position: relative;
             
         }
@@ -277,20 +277,30 @@
             position: relative; z-index: 15;
         }
 @media (max-width: 768px) {
+    .glass-card {
+        flex-direction: column;
+        height: 95vh;
+    }
+
+    .sidebar {
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .menu {
+        flex-direction: row;
+    }
+
+    .menu-btn {
+        flex: 1;
+    }
+
     .content-area {
         padding: 20px;
     }
 }
-        .content-section {
-            display: none;
-            opacity: 0; transform: translateY(20px);
-            transition: all 0.4s ease;
-        }
-
-        .content-section.active {
-            display: block !important;
-            opacity: 1; transform: translateY(0);
-        }
 
         /* MÚSICA */
         .music-player { max-width: 500px; margin: 0 auto; text-align: center; }
