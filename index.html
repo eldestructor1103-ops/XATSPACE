@@ -644,15 +644,7 @@
                 sections.forEach(s => s.classList.remove('active'));
                 menuBtns.forEach(b => b.classList.remove('active'));
                 document.getElementById(targetId)?.classList.add('active');
-                menuBtns.forEach(btn => {
-    btn.addEventListener('click', (e) => {
-        sections.forEach(s => s.classList.remove('active'));
-        menuBtns.forEach(b => b.classList.remove('active'));
-
-        document.getElementById(btn.dataset.target)?.classList.add('active');
-        e.currentTarget.classList.add('active'); // ✅ correcto
-    });
-});
+                event.target.classList.add('active');
             }
 
             menuBtns.forEach(btn => {
@@ -748,11 +740,6 @@ setInterval(() => {
         flashLightning();
     }
 }, 2000);
-
-<button onclick="document.getElementById('musicPlayer').play()">
-🔊 Activar música
-</button>
-</script>
 
     </script>
 </body>
