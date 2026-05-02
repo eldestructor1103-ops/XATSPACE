@@ -743,6 +743,15 @@ document.addEventListener('click', startAudioOnce);
 document.addEventListener('keydown', startAudioOnce);
 document.addEventListener('touchstart', startAudioOnce);
 
+            const musicSection = document.getElementById('music');
+
+musicSection.addEventListener('transitionend', () => {
+    if (musicSection.classList.contains('active')) {
+        setTimeout(() => {
+            if (!isPlaying) playMusic();
+        }, 300);
+    }
+});
 
 
             // ✨ Gotas de lluvia
