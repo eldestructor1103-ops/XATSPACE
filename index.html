@@ -732,6 +732,12 @@ document.addEventListener('click', () => {
     if (!isPlaying) playMusic();
 }, { once: true });
 
+            window.addEventListener('load', () => {
+    setTimeout(() => {
+        document.body.click();
+    }, 500);
+});
+
             // ✨ Gotas de lluvia
           const rain = document.getElementById('rain');
 
