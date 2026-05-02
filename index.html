@@ -603,9 +603,10 @@
         </div>
     </div>
 
- </section>
+</section>
+                </section>
 
-                <!-- MÚSICA -->
+<!-- MÚSICA -->
                 <section id="music" class="content-section">
                     <div class="music-player">
                         <div class="music-cover playing" id="musicCover">🎵</div>
@@ -652,7 +653,8 @@
                     showSection(btn.dataset.target);
                 });
             });
-
+            
+// 🎵 REPRODUCTOR MÚSICA PERFECCIONADO
 const audio = document.getElementById('musicPlayer');
 const playBtn = document.getElementById('playPauseBtn');
 const prevBtn = document.getElementById('prevBtn');
@@ -725,24 +727,6 @@ audio.addEventListener('ended', () => {
 
 // Inicializar
 loadSong(currentSong);
-
-
-// 🔥 AUTOPLAY REALISTA (cuando el usuario interactúa)
-function startAudioOnce() {
-    if (!isPlaying) {
-        playMusic();
-    }
-
-    document.removeEventListener('click', startAudioOnce);
-    document.removeEventListener('keydown', startAudioOnce);
-    document.removeEventListener('touchstart', startAudioOnce);
-}
-
-// Detecta CUALQUIER interacción real
-document.addEventListener('click', startAudioOnce);
-document.addEventListener('keydown', startAudioOnce);
-document.addEventListener('touchstart', startAudioOnce);
-
 
 
             // ✨ Gotas de lluvia
