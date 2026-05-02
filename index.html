@@ -728,15 +728,22 @@ loadSong(currentSong);
 
 
 // 🔥 AUTOPLAY REALISTA (cuando el usuario interactúa)
-document.addEventListener('click', () => {
-    if (!isPlaying) playMusic();
-}, { once: true });
+function startAudioOnce() {
+    if (!isPlaying) {
+        playMusic();
+    }
 
-            window.addEventListener('load', () => {
-    setTimeout(() => {
-        document.body.click();
-    }, 500);
-});
+    document.removeEventListener('click', startAudioOnce);
+    document.removeEventListener('keydown', startAudioOnce);
+    document.removeEventListener('touchstart', startAudioOnce);
+}
+
+// Detecta CUALQUIER interacción real
+document.addEventListener('click', startAudioOnce);
+document.addEventListener('keydown', startAudioOnce);
+document.addEventListener('touchstart', startAudioOnce);
+
+
 
             // ✨ Gotas de lluvia
           const rain = document.getElementById('rain');
