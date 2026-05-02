@@ -657,6 +657,12 @@ const playBtn = document.getElementById('playPauseBtn');
 const prevBtn = document.getElementById('prevBtn');
 const nextBtn = document.getElementById('nextBtn');
 const cover = document.getElementById('musicCover');
+            const title = document.getElementById('songTitle');
+
+function loadSong(index) {
+    audio.src = songs[index].src;
+    title.textContent = songs[index].title;
+}
 
 const songs = [
     "Blessd.mp3",
