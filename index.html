@@ -618,7 +618,8 @@
     <h3 id="songTitle">HOLA QUE TAL | BLESSD ❌ MYKE TOWERS</h3>
     <p>Reproduciendo automáticamente...</p>
 </div>
-
+<h3 id="songTitle"></h3>
+<audio id="musicPlayer"></audio>
 <audio id="musicPlayer" loop preload="auto">
    <audio id="musicPlayer" preload="auto"></audio>
 </audio>
@@ -652,29 +653,31 @@
                 });
             });
 
-            const audio = document.getElementById('musicPlayer');
+const audio = document.getElementById('musicPlayer');
 const playBtn = document.getElementById('playPauseBtn');
 const prevBtn = document.getElementById('prevBtn');
 const nextBtn = document.getElementById('nextBtn');
 const cover = document.getElementById('musicCover');
-            const title = document.getElementById('songTitle');
-
-function loadSong(index) {
-    audio.src = songs[index].src;
-    title.textContent = songs[index].title;
-}
+const title = document.getElementById('songTitle');
 
 const songs = [
-    "Blessd.mp3",
-    "BLESSDINSTAGRAM.mp3"
+    {
+        src: "Blessd.mp3",
+        title: "HOLA QUE TAL | BLESSD ❌ MYKE TOWERS"
+    },
+    {
+        src: "BLESSDINSTAGRAM.mp3",
+        title: "INSTAGRAM | BLESSD"
+    }
 ];
 
 let currentSong = 0;
 let isPlaying = false;
 
-// Cargar canción
+// Cargar canción + título
 function loadSong(index) {
-    audio.src = songs[index];
+    audio.src = songs[index].src;
+    title.textContent = songs[index].title;
 }
 
 // Play
@@ -713,7 +716,7 @@ prevBtn.addEventListener('click', () => {
     playMusic();
 });
 
-// Auto siguiente cuando termina
+// Auto siguiente
 audio.addEventListener('ended', () => {
     currentSong = (currentSong + 1) % songs.length;
     loadSong(currentSong);
@@ -723,16 +726,11 @@ audio.addEventListener('ended', () => {
 // Inicializar
 loadSong(currentSong);
 
-            const songs = [
-    {
-        src: "Blessd.mp3",
-        title: "HOLA QUE TAL | BLESSD ❌ MYKE TOWERS"
-    },
-    {
-        src: "BLESSDINSTAGRAM.mp3",
-        title: "INSTAGRAM | BLESSD"
-    }
-];
+
+// 🔥 AUTOPLAY REALISTA (cuando el usuario interactúa)
+document.addEventListener('click', () => {
+    if (!isPlaying) playMusic();
+}, { once: true });
 
             // ✨ Gotas de lluvia
           const rain = document.getElementById('rain');
