@@ -675,11 +675,7 @@ const title = document.getElementById('songTitle');
                         playBtn.textContent = '⏸';
                     }).catch(e => console.log('Autoplay bloqueado'));
                 }
-
-
-
-        
-
+   
 const songs = [
     {
         src: "Blessd.mp3",
@@ -747,7 +743,6 @@ audio.addEventListener('ended', () => {
 loadSong(currentSong);
 
 
-
 // Detecta CUALQUIER interacción real
 document.addEventListener('click', startAudioOnce);
 document.addEventListener('keydown', startAudioOnce);
@@ -762,7 +757,6 @@ musicSection.addEventListener('transitionend', () => {
         }, 300);
     }
 });
-
 
             // ✨ Gotas de lluvia
           const rain = document.getElementById('rain');
