@@ -606,7 +606,7 @@
 </section>
                 </section>
 
-<!-- MÚSICA -->
+                <!-- MÚSICA -->
                 <section id="music" class="content-section">
                     <div class="music-player">
                         <div class="music-cover playing" id="musicCover">🎵</div>
@@ -616,13 +616,12 @@
                             <button class="control-btn" id="nextBtn">⏭</button>
                         </div>
                         <div class="music-info">
-    <h3 id="songTitle">HOLA QUE TAL | BLESSD ❌ MYKE TOWERS</h3>
+    <h3>HOLA QUE TAL | BLESSD ❌ MYKE TOWERS</h3>
     <p>Reproduciendo automáticamente...</p>
 </div>
-<h3 id="songTitle"></h3>
-<audio id="musicPlayer"></audio>
+
 <audio id="musicPlayer" loop preload="auto">
-   <audio id="musicPlayer" preload="auto"></audio>
+    <source src="MUSICA/Blessd.mp3.mp3" type="audio/mpeg">
 </audio>
                 </section>
             </main>
@@ -653,81 +652,51 @@
                     showSection(btn.dataset.target);
                 });
             });
-            
-// 🎵 REPRODUCTOR MÚSICA PERFECCIONADO
-const audio = document.getElementById('musicPlayer');
-const playBtn = document.getElementById('playPauseBtn');
-const prevBtn = document.getElementById('prevBtn');
-const nextBtn = document.getElementById('nextBtn');
-const cover = document.getElementById('musicCover');
-const title = document.getElementById('songTitle');
 
-const songs = [
-    {
-        src: "Blessd.mp3",
-        title: "HOLA QUE TAL | BLESSD ❌ MYKE TOWERS"
-    },
-    {
-        src: "BLESSDINSTAGRAM.mp3",
-        title: "INSTAGRAM | BLESSD"
-    }
-];
+            // 🎵 REPRODUCTOR MÚSICA PERFECCIONADO
+            const audio = document.getElementById('musicPlayer');
+            const playBtn = document.getElementById('playPauseBtn');
+            const cover = document.getElementById('musicCover');
+            let isPlaying = false;
 
-let currentSong = 0;
-let isPlaying = false;
+            if (audio) {
+                audio.volume = 0.3;
+                audio.loop = true;
 
-// Cargar canción + título
-function loadSong(index) {
-    audio.src = songs[index].src;
-    title.textContent = songs[index].title;
-}
+                // AUTOPLAY MÚLTIPLE
+                function playMusic() {
+                    audio.play().then(() => {
+                        isPlaying = true;
+                        cover.classList.add('playing');
+                        playBtn.textContent = '⏸';
+                    }).catch(e => console.log('Autoplay bloqueado'));
+                }
 
-// Play
-function playMusic() {
-    audio.play().then(() => {
-        isPlaying = true;
-        cover.classList.add('playing');
-        playBtn.textContent = '⏸';
-    }).catch(() => console.log("Autoplay bloqueado"));
-}
+                // 1. Intentar inmediatamente
+                playMusic();
 
-// Pause
-function pauseMusic() {
-    audio.pause();
-    isPlaying = false;
-    cover.classList.remove('playing');
-    playBtn.textContent = '▶';
-}
+                // 2. Primer click
+                document.addEventListener('click', playMusic, { once: true });
 
-// Botón play/pause
-playBtn.addEventListener('click', () => {
-    isPlaying ? pauseMusic() : playMusic();
-});
+                // 3. Al abrir música
+                document.getElementById('music').addEventListener('transitionend', () => {
+                    if (document.getElementById('music').classList.contains('active')) {
+                        setTimeout(playMusic, 300);
+                    }
+                });
 
-// Siguiente
-nextBtn.addEventListener('click', () => {
-    currentSong = (currentSong + 1) % songs.length;
-    loadSong(currentSong);
-    playMusic();
-});
-
-// Anterior
-prevBtn.addEventListener('click', () => {
-    currentSong = (currentSong - 1 + songs.length) % songs.length;
-    loadSong(currentSong);
-    playMusic();
-});
-
-// Auto siguiente
-audio.addEventListener('ended', () => {
-    currentSong = (currentSong + 1) % songs.length;
-    loadSong(currentSong);
-    playMusic();
-});
-
-// Inicializar
-loadSong(currentSong);
-
+                // 4. Botón manual
+                playBtn.addEventListener('click', () => {
+                    if (isPlaying) {
+                        audio.pause();
+                        isPlaying = false;
+                        cover.classList.remove('playing');
+                        playBtn.textContent = '▶';
+                    } else {
+                        playMusic();
+                    }
+                });
+            }
 
             // ✨ Gotas de lluvia
           const rain = document.getElementById('rain');
