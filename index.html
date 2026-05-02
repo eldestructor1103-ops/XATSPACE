@@ -615,7 +615,7 @@
                             <button class="control-btn" id="nextBtn">⏭</button>
                         </div>
                         <div class="music-info">
-    <h3>HOLA QUE TAL | BLESSD ❌ MYKE TOWERS</h3>
+    <h3 id="songTitle">HOLA QUE TAL | BLESSD ❌ MYKE TOWERS</h3>
     <p>Reproduciendo automáticamente...</p>
 </div>
 
@@ -716,6 +716,17 @@ audio.addEventListener('ended', () => {
 
 // Inicializar
 loadSong(currentSong);
+
+            const songs = [
+    {
+        src: "Blessd.mp3",
+        title: "HOLA QUE TAL | BLESSD ❌ MYKE TOWERS"
+    },
+    {
+        src: "BLESSDINSTAGRAM.mp3",
+        title: "INSTAGRAM | BLESSD"
+    }
+];
 
             // ✨ Gotas de lluvia
           const rain = document.getElementById('rain');
