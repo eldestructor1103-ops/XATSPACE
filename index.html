@@ -659,6 +659,7 @@ const prevBtn = document.getElementById('prevBtn');
 const nextBtn = document.getElementById('nextBtn');
 const cover = document.getElementById('musicCover');
 const title = document.getElementById('songTitle');
+const musicSection = document.getElementById('music'); // 👈 AQUÍ
 
 const songs = [
     {
@@ -726,6 +727,31 @@ audio.addEventListener('ended', () => {
 // Inicializar
 loadSong(currentSong);
 
+
+            // 🔥 AUTOPLAY POR INTERACCIÓN REAL
+function startAudioOnce() {
+    if (!isPlaying) {
+        playMusic();
+    }
+
+    document.removeEventListener('click', startAudioOnce);
+    document.removeEventListener('keydown', startAudioOnce);
+    document.removeEventListener('touchstart', startAudioOnce);
+}
+
+document.addEventListener('click', startAudioOnce);
+document.addEventListener('keydown', startAudioOnce);
+document.addEventListener('touchstart', startAudioOnce);
+
+
+// 🔥 AUTOPLAY AL ABRIR SECCIÓN MÚSICA
+musicSection.addEventListener('transitionend', () => {
+    if (musicSection.classList.contains('active')) {
+        setTimeout(() => {
+            if (!isPlaying) playMusic();
+        }, 300);
+    }
+});
 
 // 🔥 AUTOPLAY REALISTA (cuando el usuario interactúa)
 function startAudioOnce() {
