@@ -603,8 +603,7 @@
         </div>
     </div>
 
-</section>
-                </section>
+ </section>
 
                 <!-- MÚSICA -->
                 <section id="music" class="content-section">
@@ -621,8 +620,7 @@
 </div>
 
 <audio id="musicPlayer" loop preload="auto">
-    <source src="Blessd.mp3" type="audio/mpeg">
-    <source src="BLESSDINSTAGRAM.mp3" type="audio/mpeg">
+   <audio id="musicPlayer" preload="auto"></audio>
 </audio>
                 </section>
             </main>
@@ -654,50 +652,70 @@
                 });
             });
 
-            // 🎵 REPRODUCTOR MÚSICA PERFECCIONADO
             const audio = document.getElementById('musicPlayer');
-            const playBtn = document.getElementById('playPauseBtn');
-            const cover = document.getElementById('musicCover');
-            let isPlaying = false;
+const playBtn = document.getElementById('playPauseBtn');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const cover = document.getElementById('musicCover');
 
-            if (audio) {
-                audio.volume = 0.3;
-                audio.loop = true;
+const songs = [
+    "Blessd.mp3",
+    "BLESSDINSTAGRAM.mp3"
+];
 
-                // AUTOPLAY MÚLTIPLE
-                function playMusic() {
-                    audio.play().then(() => {
-                        isPlaying = true;
-                        cover.classList.add('playing');
-                        playBtn.textContent = '⏸';
-                    }).catch(e => console.log('Autoplay bloqueado'));
-                }
+let currentSong = 0;
+let isPlaying = false;
 
-                // 1. Intentar inmediatamente
-                playMusic();
+// Cargar canción
+function loadSong(index) {
+    audio.src = songs[index];
+}
 
-                // 2. Primer click
-                document.addEventListener('click', playMusic, { once: true });
+// Play
+function playMusic() {
+    audio.play().then(() => {
+        isPlaying = true;
+        cover.classList.add('playing');
+        playBtn.textContent = '⏸';
+    }).catch(() => console.log("Autoplay bloqueado"));
+}
 
-                // 3. Al abrir música
-                document.getElementById('music').addEventListener('transitionend', () => {
-                    if (document.getElementById('music').classList.contains('active')) {
-                        setTimeout(playMusic, 300);
-                    }
-                });
+// Pause
+function pauseMusic() {
+    audio.pause();
+    isPlaying = false;
+    cover.classList.remove('playing');
+    playBtn.textContent = '▶';
+}
 
-                // 4. Botón manual
-                playBtn.addEventListener('click', () => {
-                    if (isPlaying) {
-                        audio.pause();
-                        isPlaying = false;
-                        cover.classList.remove('playing');
-                        playBtn.textContent = '▶';
-                    } else {
-                        playMusic();
-                    }
-                });
-            }
+// Botón play/pause
+playBtn.addEventListener('click', () => {
+    isPlaying ? pauseMusic() : playMusic();
+});
+
+// Siguiente
+nextBtn.addEventListener('click', () => {
+    currentSong = (currentSong + 1) % songs.length;
+    loadSong(currentSong);
+    playMusic();
+});
+
+// Anterior
+prevBtn.addEventListener('click', () => {
+    currentSong = (currentSong - 1 + songs.length) % songs.length;
+    loadSong(currentSong);
+    playMusic();
+});
+
+// Auto siguiente cuando termina
+audio.addEventListener('ended', () => {
+    currentSong = (currentSong + 1) % songs.length;
+    loadSong(currentSong);
+    playMusic();
+});
+
+// Inicializar
+loadSong(currentSong);
 
             // ✨ Gotas de lluvia
           const rain = document.getElementById('rain');
