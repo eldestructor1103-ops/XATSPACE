@@ -606,29 +606,25 @@
  </section>
 
                 <!-- MÚSICA -->
-                <section id="music" class="content-section">
-                    <div class="music-player">
-                        <div class="music-cover playing" id="musicCover">🎵</div>
-                        <div class="music-controls">
-                            <button class="control-btn" id="prevBtn">⏮</button>
-                            <button class="control-btn" id="playPauseBtn">⏸</button>
-                            <button class="control-btn" id="nextBtn">⏭</button>
-                        </div>
-                        <div class="music-info">
-    <h3 id="songTitle">HOLA QUE TAL | BLESSD ❌ MYKE TOWERS</h3>
-    <p>Reproduciendo automáticamente...</p>
-</div>
-<h3 id="songTitle"></h3>
-<audio id="musicPlayer"></audio>
-<audio id="musicPlayer" loop preload="auto">
-   <audio id="musicPlayer" preload="auto"></audio>
-</audio>
-                </section>
-            </main>
-        </div>
-    </div>
+<section id="music" class="content-section">
+    <div class="music-player">
+        <div class="music-cover playing" id="musicCover">🎵</div>
 
-    <script>
+        <div class="music-controls">
+            <button class="control-btn" id="prevBtn">⏮</button>
+            <button class="control-btn" id="playPauseBtn">⏸</button>
+            <button class="control-btn" id="nextBtn">⏭</button>
+        </div>
+
+        <div class="music-info">
+            <h3 id="songTitle"></h3>
+            <p>Reproduciendo automáticamente...</p>
+        </div>
+
+        <!-- ✅ SOLO UN AUDIO -->
+        <audio id="musicPlayer"></audio>
+    </div>
+</section>
 
         
         /* ===========================================
@@ -653,110 +649,113 @@
                 });
             });
 
+document.addEventListener('DOMContentLoaded', function() {
 
- // 🎵 REPRODUCTOR MÚSICA PERFECCIONADO
-const audio = document.getElementById('musicPlayer');
-const playBtn = document.getElementById('playPauseBtn');
-const prevBtn = document.getElementById('prevBtn');
-const nextBtn = document.getElementById('nextBtn');
-const cover = document.getElementById('musicCover');
-const title = document.getElementById('songTitle');
-            let isPlaying = false;
+    // 🔘 MENÚ
+    const menuBtns = document.querySelectorAll('.menu-btn');
+    const sections = document.querySelectorAll('.content-section');
 
-            if (audio) {
-                audio.volume = 0.3;
-                audio.loop = true;
+    function showSection(targetId, btn) {
+        sections.forEach(s => s.classList.remove('active'));
+        menuBtns.forEach(b => b.classList.remove('active'));
 
-                // AUTOPLAY MÚLTIPLE
-                function playMusic() {
-                    audio.play().then(() => {
-                        isPlaying = true;
-                        cover.classList.add('playing');
-                        playBtn.textContent = '⏸';
-                    }).catch(e => console.log('Autoplay bloqueado'));
-                }
-   
-const songs = [
-    {
-        src: "Blessd.mp3",
-        title: "HOLA QUE TAL | BLESSD ❌ MYKE TOWERS"
-    },
-    {
-        src: "BLESSDINSTAGRAM.mp3",
-        title: "INSTAGRAM | BLESSD"
+        document.getElementById(targetId).classList.add('active');
+        btn.classList.add('active');
     }
-];
 
-let currentSong = 0;
-let isPlaying = false;
+    menuBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            showSection(btn.dataset.target, btn);
+        });
+    });
 
-// Cargar canción + título
-function loadSong(index) {
-    audio.src = songs[index].src;
-    title.textContent = songs[index].title;
-}
 
-// Play
-function playMusic() {
-    audio.play().then(() => {
-        isPlaying = true;
-        cover.classList.add('playing');
-        playBtn.textContent = '⏸';
-    }).catch(() => console.log("Autoplay bloqueado"));
-}
+    // 🎵 MÚSICA
+    const audio = document.getElementById('musicPlayer');
+    const playBtn = document.getElementById('playPauseBtn');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const cover = document.getElementById('musicCover');
+    const title = document.getElementById('songTitle');
+    const musicSection = document.getElementById('music');
 
-// Pause
-function pauseMusic() {
-    audio.pause();
-    isPlaying = false;
-    cover.classList.remove('playing');
-    playBtn.textContent = '▶';
-}
+    const songs = [
+        {
+            src: "Blessd.mp3",
+            title: "HOLA QUE TAL | BLESSD ❌ MYKE TOWERS"
+        },
+        {
+            src: "BLESSDINSTAGRAM.mp3",
+            title: "INSTAGRAM | BLESSD"
+        }
+    ];
 
-// Botón play/pause
-playBtn.addEventListener('click', () => {
-    isPlaying ? pauseMusic() : playMusic();
-});
+    let currentSong = 0;
+    let isPlaying = false;
 
-// Siguiente
-nextBtn.addEventListener('click', () => {
-    currentSong = (currentSong + 1) % songs.length;
+    function loadSong(index) {
+        audio.src = songs[index].src;
+        title.textContent = songs[index].title;
+    }
+
+    function playMusic() {
+        audio.play().then(() => {
+            isPlaying = true;
+            cover.classList.add('playing');
+            playBtn.textContent = '⏸';
+        }).catch(() => console.log("Autoplay bloqueado"));
+    }
+
+    function pauseMusic() {
+        audio.pause();
+        isPlaying = false;
+        cover.classList.remove('playing');
+        playBtn.textContent = '▶';
+    }
+
+    playBtn.addEventListener('click', () => {
+        isPlaying ? pauseMusic() : playMusic();
+    });
+
+    nextBtn.addEventListener('click', () => {
+        currentSong = (currentSong + 1) % songs.length;
+        loadSong(currentSong);
+        playMusic();
+    });
+
+    prevBtn.addEventListener('click', () => {
+        currentSong = (currentSong - 1 + songs.length) % songs.length;
+        loadSong(currentSong);
+        playMusic();
+    });
+
+    audio.addEventListener('ended', () => {
+        currentSong = (currentSong + 1) % songs.length;
+        loadSong(currentSong);
+        playMusic();
+    });
+
     loadSong(currentSong);
-    playMusic();
-});
 
-// Anterior
-prevBtn.addEventListener('click', () => {
-    currentSong = (currentSong - 1 + songs.length) % songs.length;
-    loadSong(currentSong);
-    playMusic();
-});
+    // 🔥 AUTOPLAY POR INTERACCIÓN
+    function startAudioOnce() {
+        if (!isPlaying) playMusic();
 
-// Auto siguiente
-audio.addEventListener('ended', () => {
-    currentSong = (currentSong + 1) % songs.length;
-    loadSong(currentSong);
-    playMusic();
-});
+        document.removeEventListener('click', startAudioOnce);
+        document.removeEventListener('keydown', startAudioOnce);
+        document.removeEventListener('touchstart', startAudioOnce);
+    }
 
-// Inicializar
-loadSong(currentSong);
+    document.addEventListener('click', startAudioOnce);
+    document.addEventListener('keydown', startAudioOnce);
+    document.addEventListener('touchstart', startAudioOnce);
 
-
-// Detecta CUALQUIER interacción real
-document.addEventListener('click', startAudioOnce);
-document.addEventListener('keydown', startAudioOnce);
-document.addEventListener('touchstart', startAudioOnce);
-
-            const musicSection = document.getElementById('music');
-
-musicSection.addEventListener('transitionend', () => {
-    if (musicSection.classList.contains('active')) {
-        setTimeout(() => {
+    // 🔥 AUTOPLAY AL ABRIR SECCIÓN
+    musicSection.addEventListener('transitionend', () => {
+        if (musicSection.classList.contains('active')) {
             if (!isPlaying) playMusic();
-        }, 300);
-    }
-});
+        }
+    });
 
             // ✨ Gotas de lluvia
           const rain = document.getElementById('rain');
