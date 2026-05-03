@@ -253,11 +253,12 @@ body {
 .menu-btn {
     position: relative;
     z-index: 1;
-    background: rgba(255,255,255,0.02); /* tu fondo normal */
+    background: rgba(255,255,255,0.02);
+    border-radius: 14px;
 }
 
-/* 🔥 SOLO BORDE */
-.menu-btn::after {
+/* 🔥 BORDE ANIMADO REAL */
+.menu-btn::before {
     content: '';
     position: absolute;
     inset: 0;
@@ -274,14 +275,18 @@ body {
     background-size: 300% 300%;
     animation: borderMove 3s linear infinite;
 
-    /* 🔥 CLAVE: recorta el centro */
-    -webkit-mask: 
-        linear-gradient(#000 0 0) content-box, 
-        linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
+    /* 🔥 truco compatible */
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: destination-out;
     mask-composite: exclude;
 
     pointer-events: none;
+}
+
+/* animación */
+@keyframes borderMove {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 300% 50%; }
 }
         .menu-btn.active {
             background: rgba(255,255,255,0.18) !important;
