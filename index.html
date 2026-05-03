@@ -249,33 +249,24 @@ body {
     z-index: 1;
 }
 
-/* 🔥 BORDE ANIMADO SIEMPRE VISIBLE */
-.menu-btn {
-    position: relative;
-    z-index: 1;
-    background: rgba(255,255,255,0.02);
-    border-radius: 14px;
-}
-
-/* 🔥 BORDE ANIMADO REAL */
+/* 🔥 BORDE CON LÍNEA QUE RECORRE */
 .menu-btn::before {
     content: '';
     position: absolute;
     inset: 0;
     border-radius: 14px;
-    padding: 2px; /* grosor del borde */
+    padding: 2px;
 
-background: linear-gradient(90deg, 
-    transparent 0%,
-    transparent 40%,
-    white 50%,
-    transparent 60%,
-    transparent 100%);
+    /* 🔥 línea fina */
+    background: linear-gradient(90deg, 
+        transparent 48%,
+        white 50%,
+        transparent 52%);
 
-    background-size: 300% 300%;
+    background-size: 200% 100%;
     animation: borderMove 2s linear infinite;
 
-    /* 🔥 truco compatible */
+    /* recorte del centro */
     -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
     -webkit-mask-composite: destination-out;
     mask-composite: exclude;
@@ -283,10 +274,13 @@ background: linear-gradient(90deg,
     pointer-events: none;
 }
 
-/* animación */
-@keyframes borderMove {
-    0% { background-position: 0% 50%; }
-    100% { background-position: 200% 50%; }
+        @keyframes borderMove {
+    0% {
+        background-position: 0% 0%;
+    }
+    100% {
+        background-position: 200% 0%;
+    }
 }
         .menu-btn.active {
             background: rgba(255,255,255,0.18) !important;
