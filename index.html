@@ -22,18 +22,16 @@
         * { -ms-overflow-style: none; scrollbar-width: none; }
 
         /* BODY */
-        body {
-            font-family: 'Inter', sans-serif;
-            background: #000000 url('https://xatimg.com/image/PJNEHGXnaO8T.jpg') fixed;
-            /* 🔥 CAMBIA TU GIF AQUÍ ↑ */
-            background-size: cover;
-            background-position: center;
-            color: #ffffff;
-            height: 100vh;
-            overflow: hidden;
-            position: relative;
-            cursor: url('https://cur.cursors-4u.net/cursors/cur-13/cur1140.cur'), auto;;
-        }
+body {
+    font-family: 'Inter', sans-serif;
+    background: #000000 url('https://xatimg.com/image/PJNEHGXnaO8T.jpg') fixed;
+    background-size: cover;
+    background-position: center;
+    color: #ffffff;
+    min-height: 100vh; /* 🔥 antes: height */
+    overflow-x: hidden; /* 🔥 permite scroll vertical */
+    position: relative;
+}
 
         /* OVERLAY NEGRO PARA LEER */
         .overlay {
@@ -90,19 +88,21 @@
 
         /* CONTENEDOR PRINCIPAL */
         .container {
-            position: relative;
-            z-index: 10;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
+    position: relative;
+    z-index: 10;
+    min-height: 100vh; /* 🔥 antes height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
         }
 
         /* TARJETA DE VIDRIO */
         .glass-card {
-            width: 95%; max-width: 1200px;
-            height: 85vh;
+            width: 95%; 
+            max-width: 1200px;
+            min-height: 85vh;
+            height: auto;
             background: rgba(255,255,255,0.08);
             backdrop-filter: blur(25px);
             border-radius: 25px;
@@ -165,7 +165,8 @@
             padding: 25px;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            justify-content: flex-start;
+            gap: 20px; 
             height: 100%;
             z-index: 20;
         }
@@ -218,6 +219,7 @@
         .menu {
             display: flex; flex-direction: column;
             gap: 10px; flex: 1;
+            margin-top: 10px;
         }
 
         .menu-btn {
@@ -237,27 +239,55 @@
             z-index: 25;
             position: relative;
             overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center; /* 🔥 ESTA ES LA CLAVE */
+            text-align: center;
         }
+.menu-btn {
+    position: relative;
+    z-index: 1;
+}
 
-        .menu-btn::before {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%;
-            width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
-            transition: left 0.6s;
-        }
+/* 🔥 BORDE ANIMADO SIEMPRE VISIBLE */
+.menu-btn {
+    position: relative;
+    z-index: 1;
+    background: rgba(255,255,255,0.02);
+    border-radius: 14px;
+}
 
-        .menu-btn:hover {
-            background: rgba(255,255,255,0.12);
-            border-color: rgba(255,255,255,0.4);
-            color: #ffffff;
-            transform: translateX(4px);
-            box-shadow: 0 8px 25px rgba(255,255,255,0.2);
-        }
+/* 🔥 BORDE ANIMADO REAL */
+.menu-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 14px;
+    padding: 2px; /* grosor del borde */
 
-        .menu-btn:hover::before { left: 100%; }
+    background: linear-gradient(270deg, 
+        transparent,
+        white,
+        transparent,
+        white,
+        transparent);
 
+    background-size: 300% 300%;
+    animation: borderMove 3s linear infinite;
+
+    /* 🔥 truco compatible */
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: destination-out;
+    mask-composite: exclude;
+
+    pointer-events: none;
+}
+
+/* animación */
+@keyframes borderMove {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 300% 50%; }
+}
         .menu-btn.active {
             background: rgba(255,255,255,0.18) !important;
             border-color: rgba(255,255,255,0.6) !important;
@@ -335,15 +365,61 @@
         }
 
         /* RESPONSIVE */
-        @media (max-width: 768px) {
-            .glass-card { flex-direction: column; height: 95vh; width: 98%; }
-            .sidebar { width: 100%; flex-direction: row; padding: 20px; justify-content: space-between; align-items: center; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); }
-            .profile-section { margin-right: 15px; margin-bottom: 0; }
-            .username { font-size: 24px; }
-            .menu { flex-direction: row; gap: 6px; }
-            .menu-btn { height: 44px; padding: 0 12px; font-size: 11px; flex: 1; min-width: 70px; }
-            .content-area { padding: 25px 20px; }
-        }
+       @media (max-width: 768px) {
+
+    .glass-card {
+        flex-direction: column;
+        width: 100%;
+        min-height: auto;
+    }
+
+    .sidebar {
+        width: 100%;
+        align-items: center;
+        padding: 12px; /* 🔥 menos espacio */
+        gap: 8px;
+    }
+
+    .profile-img {
+        width: 70px;
+        height: 70px;
+        margin-bottom: 8px;
+    }
+
+    .username {
+        font-size: 22px;
+    }
+
+    .user-id {
+        font-size: 10px;
+    }
+
+    .menu {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 6px;
+    }
+
+    .menu-btn {
+        height: 40px; /* 🔥 más pequeños */
+        font-size: 11px;
+        padding: 0;
+        letter-spacing: 1px;
+    }
+
+    .content-area {
+        padding: 15px 12px;
+    }
+
+    .container {
+        align-items: flex-start;
+    }
+
+    .glass-card {
+        margin-top: 10px;
+    }
+}
 
         /*FRIENDS */
 
@@ -439,6 +515,7 @@
     transform: scale(1.05);
     box-shadow: 0 15px 40px rgba(255,255,255,0.25);
 }
+/* EFECTOS BOTONES */
 
     </style>
 </head>
@@ -616,13 +693,12 @@
                             <button class="control-btn" id="nextBtn">⏭</button>
                         </div>
                         <div class="music-info">
-    <h3>HOLA QUE TAL | BLESSD ❌ MYKE TOWERS</h3>
+    <h3 id="songTitle"></h3>
+<audio id="musicPlayer"></audio>
     <p>Reproduciendo automáticamente...</p>
 </div>
 
-<audio id="musicPlayer" loop preload="auto">
-    <source src="MUSICA/Blessd.mp3.mp3" type="audio/mpeg">
-</audio>
+<audio id="musicPlayer" preload="auto"></audio>
                 </section>
             </main>
         </div>
@@ -655,48 +731,107 @@
 
             // 🎵 REPRODUCTOR MÚSICA PERFECCIONADO
             const audio = document.getElementById('musicPlayer');
-            const playBtn = document.getElementById('playPauseBtn');
-            const cover = document.getElementById('musicCover');
-            let isPlaying = false;
+const playBtn = document.getElementById('playPauseBtn');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const cover = document.getElementById('musicCover');
+const title = document.getElementById('songTitle');
 
-            if (audio) {
-                audio.volume = 0.3;
-                audio.loop = true;
+const songs = [
+    {
+        src: "Blessd.mp3",
+        title: "HOLA QUE TAL | BLESSD ❌ MYKE TOWERS"
+    },
+    {
+        src: "BLESSDINSTAGRAM.mp3",
+        title: "INSTAGRAM | BLESSD"
+    }
+];
 
-                // AUTOPLAY MÚLTIPLE
-                function playMusic() {
-                    audio.play().then(() => {
-                        isPlaying = true;
-                        cover.classList.add('playing');
-                        playBtn.textContent = '⏸';
-                    }).catch(e => console.log('Autoplay bloqueado'));
-                }
+let currentSong = 0;
+let isPlaying = false;
 
-                // 1. Intentar inmediatamente
-                playMusic();
+// Cargar canción + título
+function loadSong(index) {
+    audio.src = songs[index].src;
+    title.textContent = songs[index].title;
+}
 
-                // 2. Primer click
-                document.addEventListener('click', playMusic, { once: true });
+// Play
+function playMusic() {
+    audio.play().then(() => {
+        isPlaying = true;
+        cover.classList.add('playing');
+        playBtn.textContent = '⏸';
+    }).catch(() => console.log("Autoplay bloqueado"));
+}
 
-                // 3. Al abrir música
-                document.getElementById('music').addEventListener('transitionend', () => {
-                    if (document.getElementById('music').classList.contains('active')) {
-                        setTimeout(playMusic, 300);
-                    }
-                });
+// Pause
+function pauseMusic() {
+    audio.pause();
+    isPlaying = false;
+    cover.classList.remove('playing');
+    playBtn.textContent = '▶';
+}
 
-                // 4. Botón manual
-                playBtn.addEventListener('click', () => {
-                    if (isPlaying) {
-                        audio.pause();
-                        isPlaying = false;
-                        cover.classList.remove('playing');
-                        playBtn.textContent = '▶';
-                    } else {
-                        playMusic();
-                    }
-                });
-            }
+// Botón play/pause
+playBtn.addEventListener('click', () => {
+    isPlaying ? pauseMusic() : playMusic();
+});
+
+// Siguiente
+nextBtn.addEventListener('click', () => {
+    currentSong = (currentSong + 1) % songs.length;
+    loadSong(currentSong);
+    playMusic();
+});
+
+// Anterior
+prevBtn.addEventListener('click', () => {
+    currentSong = (currentSong - 1 + songs.length) % songs.length;
+    loadSong(currentSong);
+    playMusic();
+});
+
+// Auto siguiente
+audio.addEventListener('ended', () => {
+    currentSong = (currentSong + 1) % songs.length;
+    loadSong(currentSong);
+    playMusic();
+});
+
+// Inicializar
+loadSong(currentSong);
+
+
+// 🔥 AUTOPLAY REALISTA (cuando el usuario interactúa)
+document.addEventListener('click', () => {
+    if (!isPlaying) playMusic();
+}, { once: true });
+
+audio.muted = true;
+audio.play();
+
+setTimeout(() => {
+    audio.muted = false;
+}, 1000);
+
+audio.muted = true;
+
+audio.play().then(() => {
+    isPlaying = true;
+    cover.classList.add('playing');
+    playBtn.textContent = '⏸';
+
+    // quitar mute después
+    setTimeout(() => {
+        audio.muted = false;
+    }, 1000);
+
+}).catch(() => {
+    console.log("Autoplay bloqueado");
+});
+
 
             // ✨ Gotas de lluvia
           const rain = document.getElementById('rain');
