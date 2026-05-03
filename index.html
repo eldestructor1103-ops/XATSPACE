@@ -263,18 +263,19 @@ body {
     position: absolute;
     inset: 0;
     border-radius: 14px;
-    padding: 2px;
+    padding: 2px; /* grosor del borde */
 
-    background: conic-gradient(
+    background: linear-gradient(270deg, 
         transparent,
         white,
         transparent,
         white,
-        transparent
-    );
+        transparent);
 
-    animation: rotateBorder 3s linear infinite;
+    background-size: 300% 300%;
+    animation: borderMove 3s linear infinite;
 
+    /* 🔥 truco compatible */
     -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
     -webkit-mask-composite: destination-out;
     mask-composite: exclude;
@@ -282,15 +283,18 @@ body {
     pointer-events: none;
 }
 
-/* 🔄 giro tipo reloj */
-@keyframes rotateBorder {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+/* animación */
+@keyframes borderMove {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 300% 50%; }
 }
+        .menu-btn.active {
+            background: rgba(255,255,255,0.18) !important;
+            border-color: rgba(255,255,255,0.6) !important;
+            color: #ffffff !important;
+            box-shadow: 0 0 20px rgba(255,255,255,0.35), 0 6px 20px rgba(255,255,255,0.15) !important;
+            transform: scale(1.01);
+        }
 
         /* CONTENIDO */
         .content-area {
