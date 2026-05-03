@@ -491,7 +491,41 @@ body {
     transform: scale(1.05);
     box-shadow: 0 15px 40px rgba(255,255,255,0.25);
 }
+/* EFECTOS BOTONES */
 
+        .menu-btn {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+/* 🔥 BORDE ANIMADO */
+.menu-btn::after {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 14px;
+    background: linear-gradient(270deg, 
+        transparent, 
+        white, 
+        transparent, 
+        white);
+    background-size: 400% 400%;
+    z-index: -1;
+    animation: borderMove 4s linear infinite;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* SOLO CUANDO HOVER */
+.menu-btn:hover::after {
+    opacity: 1;
+}
+
+@keyframes borderMove {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 400% 50%; }
+}
     </style>
 </head>
 <body>
