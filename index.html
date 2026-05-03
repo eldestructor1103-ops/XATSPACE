@@ -222,7 +222,7 @@ body {
             margin-top: 10px;
         }
 
-      .menu-btn {
+        .menu-btn {
             width: 100%; height: 52px;
             padding: 0 18px;
             background: rgba(255,255,255,0.02);
@@ -239,62 +239,106 @@ body {
             z-index: 25;
             position: relative;
             overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center; /* 🔥 ESTA ES LA CLAVE */
+            text-align: center;
         }
-
 .menu-btn {
     position: relative;
     z-index: 1;
 }
 
 /* 🔥 BORDE ANIMADO SIEMPRE VISIBLE */
+.menu-btn {
+    position: relative;
+    z-index: 1;
+    background: rgba(255,255,255,0.02);
+    border-radius: 14px;
+}
+
+/* 🔥 BORDE ANIMADO REAL */
+.menu-btn::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 14px;
+
+    background: conic-gradient(
+        from 0deg,
+        transparent,
+        white,
+        transparent,
+        white,
+        transparent
+    );
+
+    animation: rotateBorder 2s linear infinite;
+
+    z-index: -1;
+}
+
+/* máscara para que solo se vea el borde */
 .menu-btn::after {
     content: '';
     position: absolute;
-    top: -2px;
-    left: -2px;
-    width: calc(100% + 4px);
-    height: calc(100% + 4px);
-    border-radius: 14px;
-    
-    background: linear-gradient(270deg, 
-        transparent,
-        white,
-        transparent,
-        white,
-        transparent);
-    
-    background-size: 300% 300%;
-    animation: borderMove 3s linear infinite;
-
-    z-index: -1; /* 🔥 detrás del botón */
+    inset: 2px;
+    background: rgba(0,0,0,0.85); /* mismo fondo del botón */
+    border-radius: 12px;
+    z-index: -1;
 }
 
-/* animación */
-@keyframes borderMove {
-    0% { background-position: 0% 50%; }
-    100% { background-position: 300% 50%; }
+@keyframes rotateBorder {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
-/* 🔥 BARRIDO INTERNO LIMPIO */
-.menu-btn:hover span::after {
+ .menu-btn {
+    overflow: hidden;
+}
+
+/* BARRIDO */
+.menu-btn span {
+    position: relative;
+    z-index: 2;
+}
+
+.menu-btn::span {
+    pointer-events: none;
+}
+
+.menu-btn::after {
     content: '';
     position: absolute;
     top: 0;
     left: -100%;
     width: 100%;
     height: 100%;
+
     background: linear-gradient(
         120deg,
         transparent,
-        rgba(255,255,255,0.4),
+        rgba(255,255,255,0.6),
         transparent
     );
-    animation: sweep 0.6s forwards;
+
+    transition: 0.5s;
 }
 
-@keyframes sweep {
-    to { left: 100%; }
+/* 🔥 ACTIVA EN HOVER */
+.menu-btn:hover::after {
+    left: 100%;
 }
+
+/* 🔥 ACTIVA EN CLICK */
+.menu-btn:active::after {
+    left: 100%;
+    transition: 0.3s;
+}       
         .menu-btn.active {
             background: rgba(255,255,255,0.18) !important;
             border-color: rgba(255,255,255,0.6) !important;
