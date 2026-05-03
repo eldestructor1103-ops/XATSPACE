@@ -153,7 +153,7 @@ body {
         }
         @keyframes glowPulse {
             0% { opacity: 0.6; transform: scale(1); }
-            
+            100% { opacity: 1; transform: scale(1.02); }
         }
 
         /* BARRA LATERAL */
@@ -261,19 +261,20 @@ body {
 .menu-btn::before {
     content: '';
     position: absolute;
-    inset: 0;
+    inset: -2px;
     border-radius: 14px;
-    padding: 2px; /* grosor del borde */
 
-    background: linear-gradient(270deg, 
-        transparent,
-        white,
-        transparent,
-        white,
-        transparent);
+    background: conic-gradient(
+        transparent 0deg,
+        transparent 355deg,
+        white 358deg,
+        transparent 360deg
+    );
 
-    background-size: 300% 300%;
-    animation: borderMove 3s linear infinite;
+    animation: girar 2s linear infinite;
+
+    z-index: -1;
+}
 
     /* 🔥 truco compatible */
     -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
@@ -284,10 +285,11 @@ body {
 }
 
 /* animación */
-@keyframes borderMove {
-    0% { background-position: 0% 50%; }
-    100% { background-position: 300% 50%; }
+@keyframes girar {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }
+
         .menu-btn.active {
             background: rgba(255,255,255,0.18) !important;
             border-color: rgba(255,255,255,0.6) !important;
