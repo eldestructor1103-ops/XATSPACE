@@ -240,61 +240,62 @@ body {
     align-items: center;
     justify-content: center;
     position: relative;
-    overflow: hidden;
 
-    /* 🔥 CLAVE PARA QUE EL BORDE NO ENTRE */
-    background-clip: padding-box;
+    overflow: visible; /* 🔥 CLAVE: deja salir el borde */
 }
 
-/* TEXTO ENCIMA */
+/* TEXTO */
 .menu-btn span {
     position: relative;
     z-index: 2;
 }
 
-/* 🔥 BORDE CORRECTO (SOLO CONTORNO) */
+/* 🔥 BORDE EXTERNO REAL */
 .menu-btn::before {
     content: '';
     position: absolute;
-    inset: 0;
-    border-radius: 14px;
-
-    padding: 2px; /* grosor del borde */
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    border-radius: 16px;
 
     background: conic-gradient(
         from 0deg,
         transparent 0deg,
-        transparent 340deg,
-        white 350deg,
+        transparent 320deg,
+        white 340deg,
         transparent 360deg
     );
 
-    animation: borderRun 3s linear infinite;
+    animation: borderRun 2.5s linear infinite;
 
-    /* 🔥 ESTA ES LA CLAVE REAL */
-    -webkit-mask: 
-        linear-gradient(#000 0 0) padding-box, 
-        linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-
-    z-index: 1;
-    pointer-events: none;
+    z-index: 0;
 }
 
-/* ANIMACIÓN */
+/* 🔥 FONDO DEL BOTÓN ENCIMA DEL BORDE */
+.menu-btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 14px;
+    background: rgba(255,255,255,0.02);
+    z-index: 1;
+}
+
+/* 🔥 ANIMACIÓN */
 @keyframes borderRun {
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
 }
 
-/* 🔥 BARRIDO INTERNO (SE MANTIENE) */
-.menu-btn::after {
+/* 🔥 BARRIDO INTERNO */
+.menu-btn:hover span::before {
     content: '';
     position: absolute;
     top: 0;
     left: -100%;
-    width: 50%;
+    width: 100%;
     height: 100%;
     background: linear-gradient(
         120deg,
@@ -302,12 +303,13 @@ body {
         rgba(255,255,255,0.4),
         transparent
     );
-    transition: 0.5s;
-    z-index: 1;
+    animation: sweep 0.6s forwards;
 }
 
-.menu-btn:hover::after {
-    left: 100%;
+@keyframes sweep {
+    to {
+        left: 100%;
+    }
 }
         .menu-btn.active {
             background: rgba(255,255,255,0.18) !important;
