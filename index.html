@@ -222,103 +222,95 @@ body {
             margin-top: 10px;
         }
 
-        .menu-btn {
-            width: 100%; height: 52px;
-            padding: 0 18px;
-            background: rgba(255,255,255,0.02);
-            border: 1px solid rgba(255,255,255,0.12);
-            border-radius: 14px;
-            color: rgba(255,255,255,0.85);
-            font-size: 13px; font-weight: 500;
-            letter-spacing: 0.8px;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
-            display: flex; align-items: center;
-            flex-shrink: 0;
-            z-index: 25;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center; /* 🔥 ESTA ES LA CLAVE */
-            text-align: center;
-        }
 .menu-btn {
-    position: relative;
-    z-index: 1;
-}
-
-.menu-btn {
+    width: 100%;
+    height: 52px;
+    padding: 0 18px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 14px;
+    color: rgba(255,255,255,0.85);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: relative;
     overflow: hidden;
-    border-radius: 14px;
 }
 
-.menu-btn {
+/* 🔥 TEXTO ENCIMA DEL EFECTO */
+.menu-btn span {
     position: relative;
-    overflow: hidden;
-    border-radius: 14px;
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.15);
-    z-index: 1;
+    z-index: 2;
 }
 
-/* 🔥 BORDE QUE RECORRE TODO */
+/* 🔥 BORDE CON UNA SOLA LUZ */
 .menu-btn::before {
     content: '';
     position: absolute;
-    inset: 0;
-    border-radius: 14px;
+    inset: -2px;
+    border-radius: 16px;
 
     background: conic-gradient(
         from 0deg,
         transparent 0deg,
-        transparent 300deg,
-        white 320deg,
+        transparent 340deg,
+        white 350deg,
         transparent 360deg
     );
 
-    animation: giro 2s linear infinite;
+    animation: borderRun 3s linear infinite;
 
-    /* 🔥 truco REAL que sí funciona */
     padding: 2px;
+
     -webkit-mask: 
         linear-gradient(#000 0 0) content-box, 
         linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
+    -webkit-mask-composite: destination-out;
     mask-composite: exclude;
 }
 
-/* 🔥 giro continuo (una sola dirección) */
-@keyframes giro {
-    100% {
-        transform: rotate(360deg);
-    }
+/* 🔥 ANIMACIÓN EN UNA DIRECCIÓN */
+@keyframes borderRun {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }
 
-/* ✨ BARRIDO INTERNO (VISIBLE) */
+/* 🔥 BARRIDO INTERNO */
 .menu-btn::after {
     content: '';
     position: absolute;
     top: 0;
-    left: -120%;
-    width: 120%;
+    left: -100%;
+    width: 50%;
     height: 100%;
-
     background: linear-gradient(
         120deg,
         transparent,
         rgba(255,255,255,0.4),
         transparent
     );
-
-    transition: 0.6s;
+    transition: 0.5s;
+    z-index: 1;
 }
 
-/* 🔥 HOVER REAL */
+/* 🔥 HOVER */
 .menu-btn:hover::after {
-    left: 120%;
+    left: 100%;
+}
+
+/* 🔥 CLICK */
+.menu-btn:active::after {
+    left: 100%;
+}
+
+.menu-btn:hover {
+    background: rgba(255,255,255,0.08);
 }
         .menu-btn.active {
             background: rgba(255,255,255,0.18) !important;
@@ -578,10 +570,10 @@ body {
                 
                 <!-- MENÚ -->
                 <nav class="menu">
-                    <button class="menu-btn active" data-target="profile">Perfil</button>
-                    <button class="menu-btn" data-target="gallery">Galería</button>
-                    <button class="menu-btn" data-target="friends">Amigos</button>
-                    <button class="menu-btn" data-target="music">Música</button>
+<button class="menu-btn active" data-target="profile"><span>Perfil</span></button>
+<button class="menu-btn" data-target="gallery"><span>Galería</span></button>
+<button class="menu-btn" data-target="friends"><span>Amigos</span></button>
+<button class="menu-btn" data-target="music"><span>Música</span></button>
                 </nav>
             </div>
 
