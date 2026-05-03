@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
     <style>
         /* ===========================================
-           ESTILOS COMPLETOS - ANIMACIÓN RIPPLE + BORDE
+           ESTILOS COMPLETOS - LIMPIOS Y ORGANIZADOS
            =========================================== */
         
         /* RESET */
@@ -17,23 +17,23 @@
             box-sizing: border-box;
         }
         
-        /* OCULTAR SCROLLBARS */
+        /* OCULTAR SCROLLBARS EN TODOS LOS NAVEGADORES */
         *::-webkit-scrollbar { display: none; }
         * { -ms-overflow-style: none; scrollbar-width: none; }
 
         /* BODY */
-        body {
-            font-family: 'Inter', sans-serif;
-            background: #000000 url('https://xatimg.com/image/PJNEHGXnaO8T.jpg') fixed;
-            background-size: cover;
-            background-position: center;
-            color: #ffffff;
-            min-height: 100vh;
-            overflow-x: hidden;
-            position: relative;
-        }
+body {
+    font-family: 'Inter', sans-serif;
+    background: #000000 url('https://xatimg.com/image/PJNEHGXnaO8T.jpg') fixed;
+    background-size: cover;
+    background-position: center;
+    color: #ffffff;
+    min-height: 100vh; /* 🔥 antes: height */
+    overflow-x: hidden; /* 🔥 permite scroll vertical */
+    position: relative;
+}
 
-        /* OVERLAY */
+        /* OVERLAY NEGRO PARA LEER */
         .overlay {
             position: fixed;
             top: 0; left: 0;
@@ -43,50 +43,58 @@
             z-index: 1;
         }
 
-        /* LLUVIA */
-        .rain {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            pointer-events: none;
-            z-index: 2;
-        }
+        /* GOTAS DE LLUVIA */
 
-        .drop {
-            position: absolute;
-            width: 2px;
-            height: 20px;
-            background: rgba(255,255,255,0.5);
-            animation: rainFall linear infinite;
-        }
+.rain {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 2;
+}
 
-        @keyframes rainFall {
-            0% { transform: translateY(-100vh); opacity: 0; }
-            10% { opacity: 1; }
-            100% { transform: translateY(100vh); opacity: 0; }
-        }
+.drop {
+    position: absolute;
+    width: 2px;
+    height: 20px;
+    background: rgba(255,255,255,0.5);
+    animation: rainFall linear infinite;
+}
 
-        /* RAYOS */
-        .lightning {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%;
-            height: 100%;
-            background: white;
-            opacity: 0;
-            pointer-events: none;
-            z-index: 3;
-        }
+@keyframes rainFall {
+    0% {
+        transform: translateY(-100vh);
+        opacity: 0;
+    }
+    10% { opacity: 1; }
+    100% {
+        transform: translateY(100vh);
+        opacity: 0;
+    }
+}
 
-        /* CONTENEDOR */
+/*RAYOS*/
+
+.lightning {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background: white;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 3;
+}
+
+        /* CONTENEDOR PRINCIPAL */
         .container {
-            position: relative;
-            z-index: 10;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
+    position: relative;
+    z-index: 10;
+    min-height: 100vh; /* 🔥 antes height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
         }
 
         /* TARJETA DE VIDRIO */
@@ -109,27 +117,27 @@
         }
 
         .lightning-bolt {
-            position: fixed;
-            top: 0;
-            left: 50%;
-            width: 4px;
-            height: 100%;
-            background: linear-gradient(to bottom, 
-                transparent 0%, 
-                white 20%, 
-                white 80%, 
-                transparent 100%);
-            box-shadow: 
-                0 0 20px white,
-                0 0 40px white,
-                0 0 80px white;
-            opacity: 0;
-            transform: translateX(-50%);
-            pointer-events: none;
-            z-index: 5;
-        }
+    position: fixed;
+    top: 0;
+    left: 50%;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(to bottom, 
+        transparent 0%, 
+        white 20%, 
+        white 80%, 
+        transparent 100%);
+    box-shadow: 
+        0 0 20px white,
+        0 0 40px white,
+        0 0 80px white;
+    opacity: 0;
+    transform: translateX(-50%);
+    pointer-events: none;
+    z-index: 5;
+}
 
-        /* BORDE BRILLANTE */
+        /* BORDE BRILLANTE ANIMADO */
         .glass-card::before {
             content: '';
             position: absolute;
@@ -143,13 +151,12 @@
             animation: glowPulse 4s ease-in-out infinite alternate;
             filter: blur(6px);
         }
-
         @keyframes glowPulse {
             0% { opacity: 0.6; transform: scale(1); }
             100% { opacity: 1; transform: scale(1.02); }
         }
 
-        /* SIDEBAR */
+        /* BARRA LATERAL */
         .sidebar {
             width: 300px;
             background: rgba(255,255,255,0.03);
@@ -159,7 +166,7 @@
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
-            gap: 20px;
+            gap: 20px; 
             height: 100%;
             z-index: 20;
         }
@@ -208,7 +215,7 @@
             text-transform: uppercase;
         }
 
-        /* 🔥 MENÚ - ANIMACIÓN COMPLETA (RIPPLE + BORDE GIRATORIO) */
+        /* MENÚ */
         .menu {
             display: flex; flex-direction: column;
             gap: 10px; flex: 1;
@@ -216,95 +223,71 @@
         }
 
         .menu-btn {
-            width: 100%; 
-            height: 52px;
+            width: 100%; height: 52px;
             padding: 0 18px;
             background: rgba(255,255,255,0.02);
             border: 1px solid rgba(255,255,255,0.12);
             border-radius: 14px;
             color: rgba(255,255,255,0.85);
-            font-size: 13px; 
-            font-weight: 500;
+            font-size: 13px; font-weight: 500;
             letter-spacing: 0.8px;
             text-transform: uppercase;
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
-            display: flex; 
-            align-items: center;
-            justify-content: center;
-            text-align: center;
+            display: flex; align-items: center;
+            flex-shrink: 0;
+            z-index: 25;
             position: relative;
             overflow: hidden;
-            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center; /* 🔥 ESTA ES LA CLAVE */
+            text-align: center;
         }
+.menu-btn {
+    position: relative;
+    z-index: 1;
+}
 
-        /* 🔥 BORDE ANIMADO GIRATORIO (EXACTO DEL VIDEO) */
-        .menu-btn::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            padding: 2px;
-            border-radius: 14px;
-            background: conic-gradient(
-                from 0deg,
-                transparent,
-                rgba(255,255,255,0.8),
-                transparent,
-                rgba(255,255,255,0.4),
-                transparent
-            );
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            mask-composite: exclude;
-            animation: spinBorder 2s linear infinite;
-            z-index: 1;
-            pointer-events: none;
-        }
+/* 🔥 BORDE ANIMADO SIEMPRE VISIBLE */
+.menu-btn {
+    position: relative;
+    z-index: 1;
+    background: rgba(255,255,255,0.02);
+    border-radius: 14px;
+}
 
-        @keyframes spinBorder {
-            to { transform: rotate(360deg); }
-        }
+/* 🔥 BORDE ANIMADO REAL */
+.menu-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 14px;
+    padding: 2px; /* grosor del borde */
 
-        /* 🔥 RIPPLE INTERIOR (ondas concéntricas) */
-        .menu-btn > .ripple {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.4);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
-            z-index: 3;
-            pointer-events: none;
-        }
+    background: linear-gradient(270deg, 
+        transparent,
+        white,
+        transparent,
+        white,
+        transparent);
 
-        .menu-btn > .ripple.secondary {
-            background: rgba(255,255,255,0.2);
-            transition: width 0.8s 0.2s, height 0.8s 0.2s;
-        }
+    background-size: 300% 300%;
+    animation: borderMove 3s linear infinite;
 
-        /* 🔥 HOVER - RIPPLE */
-        .menu-btn:hover .ripple {
-            width: 300px;
-            height: 300px;
-        }
+    /* 🔥 truco compatible */
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: destination-out;
+    mask-composite: exclude;
 
-        .menu-btn:hover .ripple.secondary {
-            width: 200px;
-            height: 200px;
-        }
+    pointer-events: none;
+}
 
-        /* 🔥 CLICK */
-        .menu-btn:active .ripple {
-            width: 150px !important;
-            height: 150px !important;
-            transition: width 0.3s, height 0.3s;
-        }
-
-        /* ESTADO ACTIVE */
+/* animación */
+@keyframes borderMove {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 300% 50%; }
+}
         .menu-btn.active {
             background: rgba(255,255,255,0.18) !important;
             border-color: rgba(255,255,255,0.6) !important;
@@ -336,7 +319,9 @@
         .music-cover {
             width: 175px; height: 175px;
             border-radius: 20px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0.1));
             background: #000000 url('https://xatimg.com/image/ERP0zptxiilD.png') fixed;
+            background-repeat: no-repeat;
             background-size: cover;
             background-position: center;
             margin: 0 auto 30px;
@@ -380,127 +365,165 @@
         }
 
         /* RESPONSIVE */
-        @media (max-width: 768px) {
-            .glass-card {
-                flex-direction: column;
-                width: 100%;
-                min-height: auto;
-            }
-            .sidebar {
-                width: 100%;
-                align-items: center;
-                padding: 12px;
-                gap: 8px;
-            }
-            .profile-img {
-                width: 70px;
-                height: 70px;
-                margin-bottom: 8px;
-            }
-            .username {
-                font-size: 22px;
-            }
-            .user-id {
-                font-size: 10px;
-            }
-            .menu {
-                width: 100%;
-                display: grid;
-                grid-template-columns: repeat(2, 1fr);
-                gap: 6px;
-            }
-            .menu-btn {
-                height: 40px;
-                font-size: 11px;
-                padding: 0;
-                letter-spacing: 1px;
-            }
-            .content-area {
-                padding: 15px 12px;
-            }
-            .container {
-                align-items: flex-start;
-            }
-            .glass-card {
-                margin-top: 10px;
-            }
-        }
+       @media (max-width: 768px) {
 
-        /* FRIENDS */
+    .glass-card {
+        flex-direction: column;
+        width: 100%;
+        min-height: auto;
+    }
+
+    .sidebar {
+        width: 100%;
+        align-items: center;
+        padding: 12px; /* 🔥 menos espacio */
+        gap: 8px;
+    }
+
+    .profile-img {
+        width: 70px;
+        height: 70px;
+        margin-bottom: 8px;
+    }
+
+    .username {
+        font-size: 22px;
+    }
+
+    .user-id {
+        font-size: 10px;
+    }
+
+    .menu {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 6px;
+    }
+
+    .menu-btn {
+        height: 40px; /* 🔥 más pequeños */
+        font-size: 11px;
+        padding: 0;
+        letter-spacing: 1px;
+    }
+
+    .content-area {
+        padding: 15px 12px;
+    }
+
+    .container {
+        align-items: flex-start;
+    }
+
+    .glass-card {
+        margin-top: 10px;
+    }
+}
+
+        /*FRIENDS */
+
         .friend-item {
-            display: flex;
-            align-items: center;
-            padding: 20px;
-            background: rgba(255,255,255,0.05);
-            border-radius: 12px;
-            margin-bottom: 12px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-        .friend-item:hover {
-            background: rgba(255,255,255,0.15);
-            transform: translateX(8px) scale(1.02);
-            box-shadow: 0 0 20px rgba(255,255,255,0.3);
-        }
-        .friend-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            margin-right: 15px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-        .friend-avatar img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .friend-item:hover .friend-avatar {
-            transform: scale(1.1);
-            box-shadow: 0 0 15px rgba(255,255,255,0.6);
-        }
-        .friend-country {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 13px;
-            color: rgba(255,255,255,0.7);
-        }
-        .friend-country img {
-            width: 20px;
-            height: 14px;
-            border-radius: 3px;
-            transition: transform 0.3s ease;
-        }
-        .friend-item:hover .friend-country img {
-            transform: scale(1.2);
-        }
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 12px;
+    margin-bottom: 12px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
 
-        /* GALERÍA */
-        .img-hover {
-            height: 200px;
-            border-radius: 15px;
-            overflow: hidden;
-            position: relative;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .img-bg {
-            position: absolute;
-            inset: 0;
-            background-size: cover;
-            background-position: center;
-        }
-        .img-hover:hover {
-            transform: scale(1.05);
-            box-shadow: 0 15px 40px rgba(255,255,255,0.25);
-        }
+.friend-item:hover {
+    background: rgba(255,255,255,0.15);
+    transform: translateX(8px) scale(1.02);
+    box-shadow: 0 0 20px rgba(255,255,255,0.3);
+}
+
+.friend-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.3);
+    margin-right: 15px;
+    transition: all 0.3s ease;
+}
+
+.friend-item:hover .friend-avatar {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(255,255,255,0.6);
+} 
+
+/* BANDERAS CONTACTO */
+.friend-country {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.7);
+}
+
+.friend-country img {
+    width: 20px;
+    height: 14px;
+    border-radius: 3px;
+    transition: transform 0.3s ease;
+}
+
+.friend-item:hover .friend-country img {
+    transform: scale(1.2);
+}
+
+/* IMGANGES AVATAR AMIGOS */ 
+
+.friend-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 15px;
+    overflow: hidden; /* 🔥 IMPORTANTE */
+}
+
+.friend-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* EFECTOS GALAREIA */
+
+.img-hover {
+    height: 200px;
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
+
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* FONDO (NO SE ESCALA) */
+.img-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+}
+
+/* 🔥 SOLO CRECE EL CUADRO */
+.img-hover:hover {
+    transform: scale(1.05);
+    box-shadow: 0 15px 40px rgba(255,255,255,0.25);
+}
+/* EFECTOS BOTONES */
+
     </style>
 </head>
 <body>
     <!-- OVERLAY -->
     <div class="overlay"></div>
     
-    <!-- EFECTOS -->
+    <!-- PARTICULAS -->
     <div class="rain" id="rain"></div>
     <div class="lightning" id="lightning"></div>
     <div class="lightning-bolt" id="bolt"></div>
@@ -512,9 +535,11 @@
             <div class="sidebar">
                 <!-- PERFIL -->
                 <div class="profile-section">
+                    <!-- 👤 CAMBIA TU FOTO: -->
                     <div class="profile-img">
                         <img src="https://xatimg.com/image/PJNEHGXnaO8T.jpg" alt="Jhojan">
                     </div>
+                    <!-- ✏️ NOMBRE: -->
                     <div class="username">Jhojan</div>
                     <div class="user-id">(1527592733)</div>
                 </div>
@@ -536,93 +561,126 @@
                         <div class="profile-img" style="width: 150px; height: 150px;">
                             <img src="https://xatimg.com/image/kuEWaHkJCVcR.gif">
                         </div>
+                        
                         <div>
                             <h2 style="font-family: 'Dancing Script', cursive; font-size: 28px;">Sobre mí</h2>
-                            <p>Colombiano, 24 años, Ingeniero de Sistemas.<br>
-                            Apasionado por la tecnología, el aprendizaje constante y la construcción de soluciones que generen impacto.</p>
-                            <p style="margin-top: 15px; font-style: italic;">
-                                "Los sueños no tienen fecha de vencimiento, pero sí requieren decisión: piensa en grande, trabaja en silencio y deja que los resultados hablen por ti."
-                            </p>
-                        </div>
-                    </div>
+<p>
+
+    </span><br>
+    Colombiano, 24 años, Ingeniero de Sistemas.<br>
+    Apasionado por la tecnología, el aprendizaje constante y la construcción de soluciones que generen impacto.
+</p>
+
+    <p style="margin-top: 15px; font-style: italic;">
+        "Los sueños no tienen fecha de vencimiento, pero sí requieren decisión: piensa en grande, trabaja en silencio y deja que los resultados hablen por ti."
+    </p>
+</div>
                 </section>
 
                 <!-- GALERÍA -->
                 <section id="gallery" class="content-section">
                     <h2 style="font-size: 32px; margin-bottom: 30px; text-align: center;">Mi Galería</h2>
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
-                        <div class="img-hover">
-                            <div class="img-bg" style="background-image: url('https://xatimg.com/image/T1lHJlKsEeDR.jpg');"></div>
-                        </div>
-                        <div class="img-hover">
-                            <div class="img-bg" style="background-image: url('https://xatimg.com/image/CQdC8EBk9t1d.jpg');"></div>
-                        </div>
-                        <div class="img-hover">
-                            <div class="img-bg" style="background-image: url('https://xatimg.com/image/5qCcwD6W3mTj.jpg');"></div>
-                        </div>
-                    </div>
-                </section>
 
-                <!-- AMIGOS -->
-                <section id="friends" class="content-section">
-                    <h2 style="font-size: 32px; margin-bottom: 30px;">Amigos</h2>
-                    <div style="max-height: 400px; overflow-y: auto;">
-                        <div class="friend-item">
-                            <div class="friend-avatar">
-                                <img src="https://i0.xat.com/web_gear/chat/GetImage9.php?s&W=80&H=80&U=https://xatimg.com/image/kahvvqmoifdm.png">
-                            </div>
-                            <div>
-                                <h4>.𝓂ⓐⓡｂ𝐄𝓛𝓛ⓐ.</h4>
-                                <div class="friend-country">
-                                    <img src="https://flagcdn.com/w40/mx.png"> México
-                                </div>
-                            </div>
-                        </div>
-                        <div class="friend-item">
-                            <div class="friend-avatar">
-                                <img src="https://i0.xat.com/web_gear/chat/GetImage9.php?s&W=80&H=80&U=https://xatimg.com/image/epxmXIHpqNUI.png">
-                            </div>
-                            <div>
-                                <h4>𝓛𝓘𝓝𝓓𝓐</h4>
-                                <div class="friend-country">
-                                    <img src="https://flagcdn.com/w40/cl.png"> Chile
-                                </div>
-                            </div>
-                        </div>
-                        <div class="friend-item">
-                            <div class="friend-avatar">
-                                <img src="https://i0.xat.com/web_gear/chat/GetImage9.php?s&W=80&H=80&U=https://xatimg.com/image/5KHrnP2u96ba.png">
-                            </div>
-                            <div>
-                                <h4>Rosii</h4>
-                                <div class="friend-country">
-                                    <img src="https://flagcdn.com/w40/co.png"> Colombia
-                                </div>
-                            </div>
-                        </div>
-                        <div class="friend-item">
-                            <div class="friend-avatar">
-                                <img src="https://xatimg.com/image/nCm17e4kNKqM.jpg">
-                            </div>
-                            <div>
-                                <h4>ᴍɪᴍɪ ꕥ</h4>
-                                <div class="friend-country">
-                                    <img src="https://flagcdn.com/w40/mx.png"> México
-                                </div>
-                            </div>
-                        </div>
-                        <div class="friend-item">
-                            <div class="friend-avatar">
-                                <img src="https://i0.xat.com/web_gear/chat/GetImage9.php?s&W=80&H=80&U=https://xatimg.com/image/7xbCxiPFWL7S.png">
-                            </div>
-                            <div>
-                                <h4>𝙂𝙖𝙗𝙧</h4>
-                                <div class="friend-country">
-                                    <img src="https://flagcdn.com/w40/br.png"> Brasil
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
+   <!-- IMAGEN 1 -->                    
+<div class="img-hover">
+<div class="img-bg" style="background-image: url('https://xatimg.com/image/T1lHJlKsEeDR.jpg');"></div>
+</div>
+       
+  <!-- IMAGEN 2 -->                     
+<div class="img-hover">
+<div class="img-bg" style="background-image: url('https://xatimg.com/image/CQdC8EBk9t1d.jpg');"></div>
+</div>
+
+<!-- IMAGEN 3 -->
+<div class="img-hover">
+<div class="img-bg" style="background-image: url('https://xatimg.com/image/5qCcwD6W3mTj.jpg');"></div>
+</div>
+
+</div>
+                
+</section>
+
+<!-- AMIGOS -->
+<section id="friends" class="content-section">
+    <h2 style="font-size: 32px; margin-bottom: 30px;">Amigos</h2>
+
+    <div style="max-height: 400px; overflow-y: auto;">
+
+        <!-- AMIGO 1 -->
+        <div class="friend-item">
+            <div class="friend-avatar">
+                <img src="https://i0.xat.com/web_gear/chat/GetImage9.php?s&W=80&H=80&U=https://xatimg.com/image/kahvvqmoifdm.png">
+            </div>
+            <div>
+                <h4>.𝓂ⓐⓡｂ𝐄𝓛𝓛ⓐ.</h4>
+                <div class="friend-country">
+                    <img src="https://flagcdn.com/w40/mx.png">
+                    México
+                </div>
+            </div>
+        </div>
+
+        <!-- AMIGO 2 -->
+        <div class="friend-item">
+            <div class="friend-avatar">
+                <img src="https://i0.xat.com/web_gear/chat/GetImage9.php?s&W=80&H=80&U=https://xatimg.com/image/epxmXIHpqNUI.png">
+            </div>
+            <div>
+                <h4>𝓛𝓘𝓝𝓓𝓐</h4>
+                <div class="friend-country">
+                    <img src="https://flagcdn.com/w40/cl.png">
+                    Chile
+                </div>
+            </div>
+        </div>
+
+        <!-- AMIGO 3 -->
+        <div class="friend-item">
+            <div class="friend-avatar">
+                <img src="https://i0.xat.com/web_gear/chat/GetImage9.php?s&W=80&H=80&U=https://xatimg.com/image/5KHrnP2u96ba.png">
+            </div>
+            <div>
+                <h4>Rosii</h4>
+                <div class="friend-country">
+                    <img src="https://flagcdn.com/w40/co.png">
+                    Colombia
+                </div>
+            </div>
+        </div>
+
+
+        <!-- AMIGO 4 -->
+        <div class="friend-item">
+            <div class="friend-avatar">
+                <img src="https://xatimg.com/image/nCm17e4kNKqM.jpg">
+            </div>
+            <div>
+                <h4>ᴍɪᴍɪ ꕥ</h4>
+                <div class="friend-country">
+                    <img src="https://flagcdn.com/w40/mx.png">
+                    México
+                </div>
+            </div>
+        </div>
+
+        <!-- AMIGO 5 -->
+        <div class="friend-item">
+            <div class="friend-avatar">
+                <img src="https://i0.xat.com/web_gear/chat/GetImage9.php?s&W=80&H=80&U=https://xatimg.com/image/7xbCxiPFWL7S.png">
+            </div>
+            <div>
+                <h4>𝙂𝙖𝙗𝙧</h4>
+                <div class="friend-country">
+                    <img src="https://flagcdn.com/w40/br.png">
+                    Brasil
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
                 </section>
 
                 <!-- MÚSICA -->
@@ -635,150 +693,189 @@
                             <button class="control-btn" id="nextBtn">⏭</button>
                         </div>
                         <div class="music-info">
-                            <h3 id="songTitle"></h3>
-                            <p>Reproduciendo automáticamente...</p>
-                        </div>
-                        <audio id="musicPlayer" preload="auto"></audio>
-                    </div>
+    <h3 id="songTitle"></h3>
+<audio id="musicPlayer"></audio>
+    <p>Reproduciendo automáticamente...</p>
+</div>
+
+<audio id="musicPlayer" preload="auto"></audio>
                 </section>
             </main>
         </div>
     </div>
 
     <script>
+
+        
+        /* ===========================================
+           JAVASCRIPT COMPLETO - TODO FUNCIONA
+           =========================================== */
+
         document.addEventListener('DOMContentLoaded', function() {
-            // 🔥 MENÚ CON ANIMACIÓN RIPPLE COMPLETA
+            // 🎛️ MENÚ NAVEGACIÓN
             const menuBtns = document.querySelectorAll('.menu-btn');
             const sections = document.querySelectorAll('.content-section');
 
-            // Crear elementos ripple para cada botón
-            menuBtns.forEach(btn => {
-                const ripple1 = document.createElement('div');
-                ripple1.className = 'ripple';
-                const ripple2 = document.createElement('div');
-                ripple2.className = 'ripple secondary';
-                
-                btn.appendChild(ripple1);
-                btn.appendChild(ripple2);
-            });
-
-            function showSection(targetId, clickedBtn) {
+            function showSection(targetId) {
                 sections.forEach(s => s.classList.remove('active'));
                 menuBtns.forEach(b => b.classList.remove('active'));
                 document.getElementById(targetId)?.classList.add('active');
-                clickedBtn.classList.add('active');
+                event.target.classList.add('active');
             }
 
             menuBtns.forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    const ripples = btn.querySelectorAll('.ripple');
-                    showSection(btn.dataset.target, btn);
-                    
-                    // Reset ripple on click
-                    ripples.forEach(ripple => {
-                        ripple.style.width = '0';
-                        ripple.style.height = '0';
-                    });
+                btn.addEventListener('click', () => {
+                    showSection(btn.dataset.target);
                 });
             });
 
-            // 🎵 MÚSICA
+            // 🎵 REPRODUCTOR MÚSICA PERFECCIONADO
             const audio = document.getElementById('musicPlayer');
-            const playBtn = document.getElementById('playPauseBtn');
-            const prevBtn = document.getElementById('prevBtn');
-            const nextBtn = document.getElementById('nextBtn');
-            const cover = document.getElementById('musicCover');
-            const title = document.getElementById('songTitle');
+const playBtn = document.getElementById('playPauseBtn');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const cover = document.getElementById('musicCover');
+const title = document.getElementById('songTitle');
 
-            const songs = [
-                { src: "Blessd.mp3", title: "HOLA QUE TAL | BLESSD ❌ MYKE TOWERS" },
-                { src: "BLESSDINSTAGRAM.mp3", title: "INSTAGRAM | BLESSD" }
-            ];
+const songs = [
+    {
+        src: "Blessd.mp3",
+        title: "HOLA QUE TAL | BLESSD ❌ MYKE TOWERS"
+    },
+    {
+        src: "BLESSDINSTAGRAM.mp3",
+        title: "INSTAGRAM | BLESSD"
+    }
+];
 
-            let currentSong = 0;
-            let isPlaying = false;
+let currentSong = 0;
+let isPlaying = false;
 
-            function loadSong(index) {
-                audio.src = songs[index].src;
-                title.textContent = songs[index].title;
-            }
+// Cargar canción + título
+function loadSong(index) {
+    audio.src = songs[index].src;
+    title.textContent = songs[index].title;
+}
 
-            function playMusic() {
-                audio.play().then(() => {
-                    isPlaying = true;
-                    cover.classList.add('playing');
-                    playBtn.textContent = '⏸';
-                }).catch(() => console.log("Autoplay bloqueado"));
-            }
+// Play
+function playMusic() {
+    audio.play().then(() => {
+        isPlaying = true;
+        cover.classList.add('playing');
+        playBtn.textContent = '⏸';
+    }).catch(() => console.log("Autoplay bloqueado"));
+}
 
-            function pauseMusic() {
-                audio.pause();
-                isPlaying = false;
-                cover.classList.remove('playing');
-                playBtn.textContent = '▶';
-            }
+// Pause
+function pauseMusic() {
+    audio.pause();
+    isPlaying = false;
+    cover.classList.remove('playing');
+    playBtn.textContent = '▶';
+}
 
-            playBtn.addEventListener('click', () => {
-                isPlaying ? pauseMusic() : playMusic();
-            });
+// Botón play/pause
+playBtn.addEventListener('click', () => {
+    isPlaying ? pauseMusic() : playMusic();
+});
 
-            nextBtn.addEventListener('click', () => {
-                currentSong = (currentSong + 1) % songs.length;
-                loadSong(currentSong);
-                playMusic();
-            });
+// Siguiente
+nextBtn.addEventListener('click', () => {
+    currentSong = (currentSong + 1) % songs.length;
+    loadSong(currentSong);
+    playMusic();
+});
 
-            prevBtn.addEventListener('click', () => {
-                currentSong = (currentSong - 1 + songs.length) % songs.length;
-                loadSong(currentSong);
-                playMusic();
-            });
+// Anterior
+prevBtn.addEventListener('click', () => {
+    currentSong = (currentSong - 1 + songs.length) % songs.length;
+    loadSong(currentSong);
+    playMusic();
+});
 
-            audio.addEventListener('ended', () => {
-                currentSong = (currentSong + 1) % songs.length;
-                loadSong(currentSong);
-                playMusic();
-            });
+// Auto siguiente
+audio.addEventListener('ended', () => {
+    currentSong = (currentSong + 1) % songs.length;
+    loadSong(currentSong);
+    playMusic();
+});
 
-            loadSong(currentSong);
+// Inicializar
+loadSong(currentSong);
 
-            // Autoplay
-            document.addEventListener('click', () => {
-                if (!isPlaying) playMusic();
-            }, { once: true });
 
-            audio.muted = true;
-            audio.play().then(() => {
-                setTimeout(() => audio.muted = false, 1000);
-            });
+// 🔥 AUTOPLAY REALISTA (cuando el usuario interactúa)
+document.addEventListener('click', () => {
+    if (!isPlaying) playMusic();
+}, { once: true });
 
-            // 🌧️ LLUVIA
-            const rain = document.getElementById('rain');
-            for (let i = 0; i < 200; i++) {
-                const drop = document.createElement('div');
-                drop.className = 'drop';
-                drop.style.left = Math.random() * 100 + '%';
-                drop.style.animationDuration = (Math.random() * 1 + 0.5) + 's';
-                drop.style.animationDelay = Math.random() * 2 + 's';
-                rain.appendChild(drop);
-            }
+audio.muted = true;
+audio.play();
 
-            // ⚡ RAYOS
-            const lightning = document.getElementById('lightning');
-            function flashLightning() {
-                lightning.style.opacity = 0.8;
-                setTimeout(() => lightning.style.opacity = 0, 100);
-                setTimeout(() => {
-                    lightning.style.opacity = 0.6;
-                    setTimeout(() => lightning.style.opacity = 0, 80);
-                }, 150);
-            }
-            setInterval(() => {
-                if (Math.random() > 0.7) flashLightning();
-            }, 2000);
+setTimeout(() => {
+    audio.muted = false;
+}, 1000);
+
+audio.muted = true;
+
+audio.play().then(() => {
+    isPlaying = true;
+    cover.classList.add('playing');
+    playBtn.textContent = '⏸';
+
+    // quitar mute después
+    setTimeout(() => {
+        audio.muted = false;
+    }, 1000);
+
+}).catch(() => {
+    console.log("Autoplay bloqueado");
+});
+
+
+            // ✨ Gotas de lluvia
+          const rain = document.getElementById('rain');
+
+for (let i = 0; i < 200; i++) {
+    const drop = document.createElement('div');
+    drop.className = 'drop';
+    drop.style.left = Math.random() * 100 + '%';
+    drop.style.animationDuration = (Math.random() * 1 + 0.5) + 's';
+    drop.style.animationDelay = Math.random() * 2 + 's';
+    rain.appendChild(drop);
+}
         });
 
-        document.addEventListener('contextmenu', e => e.preventDefault());
+     
+document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+});
+
+const lightning = document.getElementById('lightning');
+
+function flashLightning() {
+    lightning.style.opacity = 0.8;
+
+    setTimeout(() => {
+        lightning.style.opacity = 0;
+    }, 100);
+
+    // segundo flash (realista)
+    setTimeout(() => {
+        lightning.style.opacity = 0.6;
+        setTimeout(() => {
+            lightning.style.opacity = 0;
+        }, 80);
+    }, 150);
+}
+
+// rayos aleatorios
+setInterval(() => {
+    if (Math.random() > 0.7) {
+        flashLightning();
+    }
+}, 2000);
+
     </script>
 </body>
 </html>
