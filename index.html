@@ -250,32 +250,38 @@ body {
 }
 
 /* 🔥 BORDE ANIMADO SIEMPRE VISIBLE */
+.menu-btn {
+    position: relative;
+    z-index: 1;
+    background: rgba(255,255,255,0.02); /* tu fondo normal */
+}
+
+/* 🔥 SOLO BORDE */
 .menu-btn::after {
     content: '';
     position: absolute;
-    top: -2px;
-    left: -2px;
-    width: calc(100% + 4px);
-    height: calc(100% + 4px);
+    inset: 0;
     border-radius: 14px;
-    
+    padding: 2px; /* grosor del borde */
+
     background: linear-gradient(270deg, 
         transparent,
         white,
         transparent,
         white,
         transparent);
-    
+
     background-size: 300% 300%;
     animation: borderMove 3s linear infinite;
 
-    z-index: -1; /* 🔥 detrás del botón */
-}
+    /* 🔥 CLAVE: recorta el centro */
+    -webkit-mask: 
+        linear-gradient(#000 0 0) content-box, 
+        linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
 
-/* animación */
-@keyframes borderMove {
-    0% { background-position: 0% 50%; }
-    100% { background-position: 300% 50%; }
+    pointer-events: none;
 }
         .menu-btn.active {
             background: rgba(255,255,255,0.18) !important;
