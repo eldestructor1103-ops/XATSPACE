@@ -255,12 +255,21 @@ body {
     border-radius: 14px;
 }
 
-/* 🔥 BORDE QUE RECORRE TODO EL CONTORNO */
+.menu-btn {
+    position: relative;
+    overflow: hidden;
+    border-radius: 14px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.15);
+    z-index: 1;
+}
+
+/* 🔥 BORDE QUE RECORRE TODO */
 .menu-btn::before {
     content: '';
     position: absolute;
-    inset: -2px;
-    border-radius: 16px;
+    inset: 0;
+    border-radius: 14px;
 
     background: conic-gradient(
         from 0deg,
@@ -270,47 +279,46 @@ body {
         transparent 360deg
     );
 
-    animation: borderRun 2s linear infinite;
+    animation: giro 2s linear infinite;
 
-    /* máscara para que sea solo borde */
+    /* 🔥 truco REAL que sí funciona */
+    padding: 2px;
     -webkit-mask: 
         linear-gradient(#000 0 0) content-box, 
         linear-gradient(#000 0 0);
-    -webkit-mask-composite: destination-out;
+    -webkit-mask-composite: xor;
     mask-composite: exclude;
-
-    padding: 2px;
 }
 
-/* 🔥 animación en UNA sola dirección */
-@keyframes borderRun {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
+/* 🔥 giro continuo (una sola dirección) */
+@keyframes giro {
+    100% {
         transform: rotate(360deg);
     }
 }
-        /* ✨ EFECTO BARRIDO INTERNO */
+
+/* ✨ BARRIDO INTERNO (VISIBLE) */
 .menu-btn::after {
     content: '';
     position: absolute;
     top: 0;
-    left: -100%;
-    width: 100%;
+    left: -120%;
+    width: 120%;
     height: 100%;
+
     background: linear-gradient(
         120deg,
         transparent,
-        rgba(255,255,255,0.25),
+        rgba(255,255,255,0.4),
         transparent
     );
-    transition: 0.5s;
+
+    transition: 0.6s;
 }
 
-/* 🔥 cuando pasas el mouse */
+/* 🔥 HOVER REAL */
 .menu-btn:hover::after {
-    left: 100%;
+    left: 120%;
 }
         .menu-btn.active {
             background: rgba(255,255,255,0.18) !important;
