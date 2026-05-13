@@ -321,7 +321,10 @@ body {
         width: 220px; /* 🔥 tamaño */
         height: 220px; /* 🔥 tamaño */
         border-radius: 50%; /* 🔥 vuelve totalmente circular */
-        background: #000000 url('https://xatimg.com/image/ERP0zptxiilD.png') center/cover no-repeat;
+        background-color: #000;
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
         margin: 0 auto 30px;
         display: flex;
         align-items: center;
@@ -333,6 +336,9 @@ body {
         overflow: hidden; /* 🔥 importante para que recorte perfecto */
         box-shadow: 0 0 25px rgba(255,255,255,0.25), inset 0 0 20px rgba(0,0,0,0.6);
         position: relative;
+        transition: 
+        transform 0.3s ease,
+        background-image 0.5s ease;
 }
         .music-cover::after {
     content: '';
@@ -739,28 +745,37 @@ const title = document.getElementById('songTitle');
 const songs = [
     {
         src: "StreetPoem.mp3",
-        title: "Anuel AA - Street Poem"
+        title: "Anuel AA - Street Poem",
+        cover: "https://xatimg.com/image/ERP0zptxiilD.png"
     },
-    
+
     {
         src: "Blessd.mp3",
-        title: "HOLA QUE TAL | BLESSD ❌ MYKE TOWERS"
+        title: "HOLA QUE TAL | BLESSD ❌ MYKE TOWERS",
+        cover: "https://xatimg.com/image/T1lHJlKsEeDR.jpg"
     },
+
     {
         src: "BLESSDINSTAGRAM.mp3",
-        title: "INSTAGRAM | BLESSD"
+        title: "INSTAGRAM | BLESSD",
+        cover: "https://xatimg.com/image/CQdC8EBk9t1d.jpg"
     }
+];
 ];
 
 let currentSong = 0;
 let isPlaying = false;
 
-// Cargar canción + título
 function loadSong(index) {
-    audio.src = songs[index].src;
-    title.textContent = songs[index].title;
-}
 
+    audio.src = songs[index].src;
+
+    title.textContent = songs[index].title;
+
+    // 🔥 cambiar portada automáticamente
+    cover.style.backgroundImage = `url('${songs[index].cover}')`;
+
+}
 // Play
 function playMusic() {
     audio.play().then(() => {
