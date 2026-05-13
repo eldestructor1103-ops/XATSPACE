@@ -1,910 +1,602 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Xatspace - Jhojan</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        /* ===========================================
-           ESTILOS COMPLETOS - LIMPIOS Y ORGANIZADOS
-           =========================================== */
-        
-        /* RESET */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        /* OCULTAR SCROLLBARS EN TODOS LOS NAVEGADORES */
-        *::-webkit-scrollbar { display: none; }
-        * { -ms-overflow-style: none; scrollbar-width: none; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        /* BODY */
-body {
-    font-family: 'Inter', sans-serif;
-    background: #000000 url('https://xatimg.com/image/PJNEHGXnaO8T.jpg') fixed;
-    background-size: cover;
-    background-position: center;
-    color: #ffffff;
-    min-height: 100vh; /* 🔥 antes: height */
-    overflow-x: hidden; /* 🔥 permite scroll vertical */
-    position: relative;
+<title>Xatspace - Jhojan</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-        /* OVERLAY NEGRO PARA LEER */
-        .overlay {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0,0,0,0.75);
-            backdrop-filter: blur(12px);
-            z-index: 1;
-        }
-
-        /* GOTAS DE LLUVIA */
-
-.rain {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    pointer-events: none;
-    z-index: 2;
+body{
+    font-family:'Inter',sans-serif;
+    background:#000 url('https://xatimg.com/image/PJNEHGXnaO8T.jpg') center/cover fixed;
+    color:white;
+    min-height:100vh;
+    overflow-x:hidden;
+    position:relative;
 }
 
-.drop {
-    position: absolute;
-    width: 2px;
-    height: 20px;
-    background: rgba(255,255,255,0.5);
-    animation: rainFall linear infinite;
+.overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.75);
+    backdrop-filter:blur(12px);
+    z-index:1;
 }
 
-@keyframes rainFall {
-    0% {
-        transform: translateY(-100vh);
-        opacity: 0;
+.rain{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:2;
+}
+
+.drop{
+    position:absolute;
+    width:2px;
+    height:20px;
+    background:rgba(255,255,255,.5);
+    animation:rainFall linear infinite;
+}
+
+@keyframes rainFall{
+    0%{
+        transform:translateY(-100vh);
+        opacity:0;
     }
-    10% { opacity: 1; }
-    100% {
-        transform: translateY(100vh);
-        opacity: 0;
+
+    10%{
+        opacity:1;
+    }
+
+    100%{
+        transform:translateY(100vh);
+        opacity:0;
     }
 }
 
-/*RAYOS*/
-
-.lightning {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%;
-    height: 100%;
-    background: white;
-    opacity: 0;
-    pointer-events: none;
-    z-index: 3;
+.container{
+    position:relative;
+    z-index:10;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
 }
 
-        /* CONTENEDOR PRINCIPAL */
-        .container {
-    position: relative;
-    z-index: 10;
-    min-height: 100vh; /* 🔥 antes height */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-        }
-
-        /* TARJETA DE VIDRIO */
-        .glass-card {
-            width: 95%; 
-            max-width: 1200px;
-            min-height: 75vh;
-            height: auto;
-            background: rgba(255,255,255,0.08);
-            backdrop-filter: blur(25px);
-            border-radius: 25px;
-            border: 1px solid rgba(255,255,255,0.15);
-            box-shadow: 
-                0 25px 50px rgba(0,0,0,0.5),
-                0 0 0 1px rgba(255,255,255,0.1),
-                inset 0 1px 0 rgba(255,255,255,0.2);
-            display: flex;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .lightning-bolt {
-    position: fixed;
-    top: 0;
-    left: 50%;
-    width: 4px;
-    height: 100%;
-    background: linear-gradient(to bottom, 
-        transparent 0%, 
-        white 20%, 
-        white 80%, 
-        transparent 100%);
-    box-shadow: 
-        0 0 20px white,
-        0 0 40px white,
-        0 0 80px white;
-    opacity: 0;
-    transform: translateX(-50%);
-    pointer-events: none;
-    z-index: 5;
+.glass-card{
+    width:95%;
+    max-width:1200px;
+    min-height:75vh;
+    background:rgba(255,255,255,.08);
+    backdrop-filter:blur(25px);
+    border-radius:25px;
+    border:1px solid rgba(255,255,255,.15);
+    box-shadow:0 25px 50px rgba(0,0,0,.5);
+    display:flex;
+    overflow:hidden;
 }
 
-        /* BORDE BRILLANTE ANIMADO */
-        .glass-card::before {
-            content: '';
-            position: absolute;
-            inset: -2px;
-            background: linear-gradient(45deg, 
-                rgba(255,255,255,0.4), 
-                rgba(255,255,255,0.1), 
-                rgba(255,255,255,0.4));
-            border-radius: 27px;
-            z-index: -1;
-            animation: glowPulse 4s ease-in-out infinite alternate;
-            filter: blur(6px);
-        }
-        @keyframes glowPulse {
-            0% { opacity: 0.6; transform: scale(1); }
-            100% { opacity: 1; transform: scale(1.02); }
-        }
-
-        /* BARRA LATERAL */
-        .sidebar {
-            width: 300px;
-            background: rgba(255,255,255,0.03);
-            backdrop-filter: blur(15px);
-            border-right: 1px solid rgba(255,255,255,0.08);
-            padding: 25px;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            gap: 20px; 
-            height: 100%;
-            z-index: 20;
-        }
-
-        .profile-section {
-            text-align: center;
-            margin-bottom: 20px;
-            flex-shrink: 0;
-        }
-
-        .profile-img {
-            width: 85px; height: 85px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, rgba(255,255,255,0.3), rgba(255,255,255,0.1));
-            border: 2px solid rgba(255,255,255,0.3);
-            margin: 0 auto 12px;
-            position: relative;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            overflow: hidden;
-        }
-
-        .profile-img:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 25px rgba(255,255,255,0.4);
-        }
-
-        .profile-img img {
-            width: 100%; height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-        }
-
-        .username {
-            font-family: 'Dancing Script', cursive;
-            font-size: 32px; font-weight: 700;
-            color: #ffffff;
-            margin-bottom: 4px;
-            text-shadow: 0 0 15px rgba(255,255,255,0.5);
-        }
-
-        .user-id {
-            font-size: 11px;
-            color: rgba(255,255,255,0.6);
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-
-        /* MENÚ */
-        .menu {
-            display: flex; flex-direction: column;
-            gap: 10px; flex: 1;
-            margin-top: 10px;
-        }
-
-        .menu-btn {
-            width: 100%; height: 52px;
-            padding: 0 18px;
-            background: rgba(255,255,255,0.02);
-            border: 1px solid rgba(255,255,255,0.12);
-            border-radius: 14px;
-            color: rgba(255,255,255,0.85);
-            font-size: 13px; font-weight: 500;
-            letter-spacing: 0.8px;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
-            display: flex; align-items: center;
-            flex-shrink: 0;
-            z-index: 25;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center; /* 🔥 ESTA ES LA CLAVE */
-            text-align: center;
-        }
-.menu-btn {
-    position: relative;
-    z-index: 1;
+.sidebar{
+    width:300px;
+    background:rgba(255,255,255,.03);
+    border-right:1px solid rgba(255,255,255,.08);
+    padding:25px;
 }
 
-/* 🔥 BORDE ANIMADO SIEMPRE VISIBLE */
-.menu-btn {
-    position: relative;
-    z-index: 1;
-    background: rgba(255,255,255,0.02);
-    border-radius: 14px;
+.profile-section{
+    text-align:center;
+    margin-bottom:25px;
 }
 
-/* 🔥 BORDE ANIMADO REAL */
-.menu-btn::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: 14px;
-    padding: 2px; /* grosor del borde */
-
-    background: linear-gradient(270deg, 
-        transparent,
-        white,
-        transparent,
-        white,
-        transparent);
-
-    background-size: 300% 300%;
-    animation: borderMove 3s linear infinite;
-
-    /* 🔥 truco compatible */
-    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-    -webkit-mask-composite: destination-out;
-    mask-composite: exclude;
-
-    pointer-events: none;
+.profile-img{
+    width:90px;
+    height:90px;
+    border-radius:50%;
+    overflow:hidden;
+    margin:auto auto 15px;
+    border:2px solid rgba(255,255,255,.3);
 }
 
-/* animación */
-@keyframes borderMove {
-    0% { background-position: 0% 50%; }
-    100% { background-position: 300% 50%; }
+.profile-img img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
 }
-        .menu-btn.active {
-            background: rgba(255,255,255,0.18) !important;
-            border-color: rgba(255,255,255,0.6) !important;
-            color: #ffffff !important;
-            box-shadow: 0 0 20px rgba(255,255,255,0.35), 0 6px 20px rgba(255,255,255,0.15) !important;
-            transform: scale(1.01);
-        }
 
-        /* CONTENIDO */
-        .content-area {
-            flex: 1; padding: 50px;
-            overflow-y: auto;
-            position: relative; z-index: 15;
-        }
-
-        .content-section {
-            display: none;
-            opacity: 0; transform: translateY(20px);
-            transition: all 0.4s ease;
-        }
-
-        .content-section.active {
-            display: block !important;
-            opacity: 1; transform: translateY(0);
-        }
-
-        /* MÚSICA */
-        .music-player { max-width: 500px; margin: 0 auto; text-align: center; }
-        .music-cover {
-        
-        width: 220px; /* 🔥 tamaño */
-        height: 220px; /* 🔥 tamaño */
-        border-radius: 50%; /* 🔥 vuelve totalmente circular */
-        background-color: #000;
-        background-position: center;
-        background-size: cover;
-        background-repeat: no-repeat;
-        margin: 0 auto 30px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 80px;
-        animation: rotateCover 20s linear infinite paused;
-        border: 4px solid rgba(255,255,255,0.3);
-        transition: all 0.3s ease;
-        overflow: hidden; /* 🔥 importante para que recorte perfecto */
-        box-shadow: 0 0 25px rgba(255,255,255,0.25), inset 0 0 20px rgba(0,0,0,0.6);
-        position: relative;
-        transition: 
-        transform 0.3s ease,
-        background-image 0.5s ease;
+.username{
+    font-family:'Dancing Script',cursive;
+    font-size:34px;
 }
-        .music-cover::after {
-    content: '';
-    position: absolute;
-    width: 25px;
-    height: 25px;
-    background: rgba(0,0,0,0.8);
-    border-radius: 50%;
-    border: 3px solid rgba(255,255,255,0.3);
-    
+
+.user-id{
+    font-size:11px;
+    color:rgba(255,255,255,.6);
 }
-        .music-cover.playing { animation-play-state: running; }
-        @keyframes rotateCover {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-        .music-controls {
-            display: flex; align-items: center;
-            justify-content: center; gap: 25px;
-            margin-bottom: 25px;
-        }
-        .control-btn {
-            width: 60px; height: 60px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.25);
-            border: 2px solid rgba(255,255,255,0.4);
-            color: #ffffff; font-size: 24px;
-            cursor: pointer; transition: all 0.3s ease;
-            display: flex; align-items: center; justify-content: center;
-        }
-        .control-btn:hover {
-            background: rgba(255,255,255,0.4);
-            transform: scale(1.1);
-            box-shadow: 0 0 20px rgba(255,255,255,0.4);
-        }
 
-        /* OCULTAR REPRODUCTORES */
-        #musicPlayer, #youtubePlayer {
-            position: absolute !important;
-            left: -9999px !important;
-            width: 1px !important; height: 1px !important;
-            opacity: 0 !important; visibility: hidden !important;
-        }
+.menu{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
 
-        /* RESPONSIVE */
-       @media (max-width: 768px) {
+.menu-btn{
+    height:52px;
+    border:none;
+    border-radius:14px;
+    background:rgba(255,255,255,.08);
+    color:white;
+    cursor:pointer;
+    font-size:13px;
+    letter-spacing:1px;
+    transition:.3s;
+}
 
-    .glass-card {
-        flex-direction: column;
-        width: 100%;
-        min-height: auto;
+.menu-btn:hover{
+    background:rgba(255,255,255,.2);
+}
+
+.menu-btn.active{
+    background:rgba(255,255,255,.25);
+    box-shadow:0 0 20px rgba(255,255,255,.3);
+}
+
+.content-area{
+    flex:1;
+    padding:50px;
+    overflow-y:auto;
+}
+
+.content-section{
+    display:none;
+}
+
+.content-section.active{
+    display:block;
+}
+
+.img-hover{
+    height:150px;
+    border-radius:15px;
+    overflow:hidden;
+    position:relative;
+    transition:.3s;
+}
+
+.img-hover:hover{
+    transform:scale(1.05);
+}
+
+.img-bg{
+    position:absolute;
+    inset:0;
+    background-size:cover;
+    background-position:center;
+}
+
+.friend-item{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    padding:15px;
+    background:rgba(255,255,255,.05);
+    border-radius:12px;
+    margin-bottom:12px;
+}
+
+.friend-avatar{
+    width:55px;
+    height:55px;
+    border-radius:50%;
+    overflow:hidden;
+}
+
+.friend-avatar img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.friend-country{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin-top:5px;
+    color:rgba(255,255,255,.7);
+    font-size:13px;
+}
+
+.friend-country img{
+    width:20px;
+}
+
+.music-player{
+    max-width:500px;
+    margin:auto;
+    text-align:center;
+}
+
+.music-cover{
+    width:220px;
+    height:220px;
+    border-radius:50%;
+    margin:auto auto 30px;
+    background-size:cover;
+    background-position:center;
+    border:4px solid rgba(255,255,255,.3);
+    animation:rotateCover 20s linear infinite paused;
+}
+
+.music-cover.playing{
+    animation-play-state:running;
+}
+
+@keyframes rotateCover{
+    from{
+        transform:rotate(0deg);
     }
 
-    .sidebar {
-        width: 100%;
-        min-height: 100%;
-        align-items: center;
-        padding: 12px; /* 🔥 menos espacio */
-        gap: 8px;
-    }
-
-    .profile-img {
-        width: 70px;
-        height: 70px;
-        margin-bottom: 8px;
-    }
-
-    .username {
-        font-size: 22px;
-    }
-
-    .user-id {
-        font-size: 10px;
-    }
-
-    .menu {
-        width: 100%;
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 6px;
-    }
-
-    .menu-btn {
-        height: 40px; /* 🔥 más pequeños */
-        font-size: 11px;
-        padding: 0;
-        letter-spacing: 1px;
-    }
-
-    .content-area {
-        padding: 15px 12px;
-    }
-
-    .container {
-        align-items: flex-start;
-    }
-
-    .glass-card {
-        margin-top: 10px;
+    to{
+        transform:rotate(360deg);
     }
 }
 
-        /*FRIENDS */
-
-        .friend-item {
-    display: flex;
-    align-items: center;
-    padding: 20px;
-    background: rgba(255,255,255,0.05);
-    border-radius: 12px;
-    margin-bottom: 12px;
-    transition: all 0.3s ease;
-    cursor: pointer;
+.music-controls{
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    margin-bottom:25px;
 }
 
-.friend-item:hover {
-    background: rgba(255,255,255,0.15);
-    transform: translateX(8px) scale(1.02);
-    box-shadow: 0 0 20px rgba(255,255,255,0.3);
+.control-btn{
+    width:60px;
+    height:60px;
+    border-radius:50%;
+    border:none;
+    background:rgba(255,255,255,.2);
+    color:white;
+    font-size:22px;
+    cursor:pointer;
 }
 
-.friend-avatar {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.3);
-    margin-right: 15px;
-    transition: all 0.3s ease;
+.control-btn:hover{
+    background:rgba(255,255,255,.4);
 }
 
-.friend-item:hover .friend-avatar {
-    transform: scale(1.1);
-    box-shadow: 0 0 15px rgba(255,255,255,0.6);
-} 
-
-/* BANDERAS CONTACTO */
-.friend-country {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 13px;
-    color: rgba(255,255,255,0.7);
+#musicPlayer{
+    display:none;
 }
 
-.friend-country img {
-    width: 20px;
-    height: 14px;
-    border-radius: 3px;
-    transition: transform 0.3s ease;
+@media(max-width:768px){
+
+    .glass-card{
+        flex-direction:column;
+    }
+
+    .sidebar{
+        width:100%;
+    }
+
+    .content-area{
+        padding:20px;
+    }
+
 }
 
-.friend-item:hover .friend-country img {
-    transform: scale(1.2);
-}
-
-/* IMGANGES AVATAR AMIGOS */ 
-
-.friend-avatar {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    margin-right: 15px;
-    overflow: hidden; /* 🔥 IMPORTANTE */
-}
-
-.friend-avatar img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-
-/* EFECTOS GALAREIA */
-
-.img-hover {
-    height: 150px;
-    border-radius: 15px;
-    overflow: hidden;
-    position: relative;
-
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-/* FONDO (NO SE ESCALA) */
-.img-bg {
-    position: absolute;
-    inset: 0;
-    background-size: cover;
-    background-position: center;
-}
-
-/* 🔥 SOLO CRECE EL CUADRO */
-.img-hover:hover {
-    transform: scale(1.05);
-    box-shadow: 0 15px 40px rgba(255,255,255,0.25);
-}
-/* EFECTOS BOTONES */
-
-    </style>
+</style>
 </head>
+
 <body>
-    <!-- OVERLAY -->
-    <div class="overlay"></div>
-    
-    <!-- PARTICULAS -->
-    <div class="rain" id="rain"></div>
-    <div class="lightning" id="lightning"></div>
-    <div class="lightning-bolt" id="bolt"></div>
 
-    <!-- CONTENEDOR -->
-    <div class="container">
-        <div class="glass-card">
-            <!-- SIDEBAR -->
-            <div class="sidebar">
-                <!-- PERFIL -->
-                <div class="profile-section">
-                    <!-- 👤 CAMBIA TU FOTO: -->
-                    <div class="profile-img">
-                        <img src="https://xatimg.com/image/PJNEHGXnaO8T.jpg" alt="Jhojan">
-                    </div>
-                    <!-- ✏️ NOMBRE: -->
-                    <div class="username">Jhojan</div>
-                    <div class="user-id">(1527592733)</div>
-                </div>
-                
-                <!-- MENÚ -->
-                <nav class="menu">
-                    <button class="menu-btn active" data-target="profile">Perfil</button>
-                    <button class="menu-btn" data-target="gallery">Galería</button>
-                    <button class="menu-btn" data-target="friends">Amigos</button>
-                    <button class="menu-btn" data-target="music">Música</button>
-                </nav>
-            </div>
+<div class="overlay"></div>
 
-            <!-- CONTENIDO -->
-            <main class="content-area">
-                <!-- PERFIL -->
-                <section id="profile" class="content-section active">
-                    <div style="display: flex; gap: 30px; align-items: center; flex-wrap: wrap;">
-                        </div>
-                        
-                        <div>
-                            <h2 style="font-family: 'Dancing Script', cursive; font-size: 28px;">Sobre mí</h2>
-<p>
+<div class="rain" id="rain"></div>
 
-    </span><br>
-Colombiano.
-    </p>
-24 años.
-    </p>
-Ingeniero de Sistemas.<br>
+<div class="container">
+
+<div class="glass-card">
+
+<div class="sidebar">
+
+<div class="profile-section">
+
+<div class="profile-img">
+<img src="https://xatimg.com/image/PJNEHGXnaO8T.jpg">
+</div>
+
+<div class="username">Jhojan</div>
+<div class="user-id">(1527592733)</div>
+
+</div>
+
+<nav class="menu">
+
+<button class="menu-btn active" data-target="profile">Perfil</button>
+
+<button class="menu-btn" data-target="gallery">Galería</button>
+
+<button class="menu-btn" data-target="friends">Amigos</button>
+
+<button class="menu-btn" data-target="music">Música</button>
+
+</nav>
+
+</div>
+
+<main class="content-area">
+
+<section id="profile" class="content-section active">
+
+<h2 style="font-family:'Dancing Script',cursive;font-size:32px;margin-bottom:20px;">
+Sobre mí
+</h2>
+
+<p>Colombiano.</p>
+<p>24 años.</p>
+<p>Ingeniero de Sistemas.</p>
+
+<p style="margin-top:20px;font-style:italic;">
+"Los sueños no tienen fecha de vencimiento."
 </p>
 
-    <p style="margin-top: 15px; font-style: italic;">
-        "Los sueños no tienen fecha de vencimiento, pero sí requieren decisión: piensa en grande, trabaja en silencio y deja que los resultados hablen por ti."
-    </p>
-</div>
-                </section>
-
-                <!-- GALERÍA -->
-                <section id="gallery" class="content-section">
-                    <h2 style="font-size: 32px; margin-bottom: 30px; text-align: center;">Mi Galería</h2>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
-
-
-   <!-- IMAGEN 1 -->                    
-<div class="img-hover">
-<div class="img-bg" style="background-image: url('https://xatimg.com/image/T1lHJlKsEeDR.jpg');"></div>
-</div>
-       
-  <!-- IMAGEN 2 -->                     
-<div class="img-hover">
-<div class="img-bg" style="background-image: url('https://xatimg.com/image/CQdC8EBk9t1d.jpg');"></div>
-</div>
-
-<!-- IMAGEN 3 -->
-<div class="img-hover">
-<div class="img-bg" style="background-image: url('https://xatimg.com/image/5qCcwD6W3mTj.jpg');"></div>
-</div>
-                        
-<!-- IMAGEN 4 -->
-<div class="img-hover">
-<div class="img-bg" style="background-image: url('https://xatimg.com/image/tys6XC9Oul6J.jpg');"></div>
-</div>
-                        
-<!-- IMAGEN 5 -->
-<div class="img-hover">
-<div class="img-bg" style="background-image: url('https://xatimg.com/image/hLi6mLDsIxXP.jpg');"></div>
-</div>
-                        
-<!-- IMAGEN 6 -->
-<div class="img-hover">
-<div class="img-bg" style="background-image: url('https://xatimg.com/image/WQP2phR2aXFs.jpg');"></div>
-</div>
-                
 </section>
 
-<!-- AMIGOS -->
+<section id="gallery" class="content-section">
+
+<h2 style="font-size:32px;margin-bottom:30px;text-align:center;">
+Mi Galería
+</h2>
+
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;">
+
+<div class="img-hover">
+<div class="img-bg" style="background-image:url('https://xatimg.com/image/T1lHJlKsEeDR.jpg');"></div>
+</div>
+
+<div class="img-hover">
+<div class="img-bg" style="background-image:url('https://xatimg.com/image/CQdC8EBk9t1d.jpg');"></div>
+</div>
+
+<div class="img-hover">
+<div class="img-bg" style="background-image:url('https://xatimg.com/image/5qCcwD6W3mTj.jpg');"></div>
+</div>
+
+<div class="img-hover">
+<div class="img-bg" style="background-image:url('https://xatimg.com/image/tys6XC9Oul6J.jpg');"></div>
+</div>
+
+</div>
+
+</section>
+
 <section id="friends" class="content-section">
-    <h2 style="font-size: 32px; margin-bottom: 30px;">Amigos</h2>
 
-    <div style="max-height: 400px; overflow-y: auto;">
+<h2 style="font-size:32px;margin-bottom:30px;">
+Amigos
+</h2>
 
-        <!-- AMIGO 1 -->
-        <div class="friend-item">
-            <div class="friend-avatar">
-                <img src="https://i0.xat.com/web_gear/chat/GetImage9.php?s&W=80&H=80&U=https://xatimg.com/image/J0JLWRisztvR.png">
-            </div>
-            <div>
-                <h4>.𝓂ⓐⓡｂ𝐄𝓛𝓛ⓐ.</h4>
-                <div class="friend-country">
-                    <img src="https://flagcdn.com/w40/mx.png">
-                    México
-                </div>
-            </div>
-        </div>
+<div class="friend-item">
 
-        <!-- AMIGO 2 -->
-        <div class="friend-item">
-            <div class="friend-avatar">
-                <img src="https://i0.xat.com/web_gear/chat/GetImage9.php?s&W=80&H=80&U=https://xatimg.com/image/epxmXIHpqNUI.png">
-            </div>
-            <div>
-                <h4>𝓛𝓘𝓝𝓓𝓐</h4>
-                <div class="friend-country">
-                    <img src="https://flagcdn.com/w40/cl.png">
-                    Chile
-                </div>
-            </div>
-        </div>
-
-        <!-- AMIGO 3 -->
-        <div class="friend-item">
-            <div class="friend-avatar">
-                <img src="https://xatimg.com/image/D1VVfXg83TGW.png">
-            </div>
-            <div>
-                <h4>Rosii</h4>
-                <div class="friend-country">
-                    <img src="https://flagcdn.com/w40/co.png">
-                    Colombia
-                </div>
-            </div>
-        </div>
-
-
-</section>
-                </section>
-
-                <!-- MÚSICA -->
-                <section id="music" class="content-section">
-                    <div class="music-player">
-                        <div class="music-cover playing" id="musicCover">🎵</div>
-                        <div class="music-controls">
-                            <button class="control-btn" id="prevBtn">⏮</button>
-                            <button class="control-btn" id="playPauseBtn">⏸</button>
-                            <button class="control-btn" id="nextBtn">⏭</button>
-                        </div>
-                        <div class="music-info">
-    <h3 id="songTitle"></h3>
-    <p>Reproduciendo automáticamente...</p>
+<div class="friend-avatar">
+<img src="https://xatimg.com/image/D1VVfXg83TGW.png">
 </div>
 
-<audio id="musicPlayer" preload="auto"></audio>
-                </section>
-            </main>
-        </div>
-    </div>
+<div>
 
-    <script>
+<h4>Rosii</h4>
 
-        
-        /* ===========================================
-           JAVASCRIPT COMPLETO - TODO FUNCIONA
-           =========================================== */
+<div class="friend-country">
+<img src="https://flagcdn.com/w40/co.png">
+Colombia
+</div>
 
-        document.addEventListener('DOMContentLoaded', function() {
-            // 🎛️ MENÚ NAVEGACIÓN
-            const menuBtns = document.querySelectorAll('.menu-btn');
-            const sections = document.querySelectorAll('.content-section');
+</div>
 
-            function showSection(targetId, button) {
+</div>
 
-    sections.forEach(section => {
-        section.classList.remove('active');
-    });
+</section>
 
-    menuBtns.forEach(btn => {
-        btn.classList.remove('active');
-    });
+<section id="music" class="content-section">
 
-    document.getElementById(targetId).classList.add('active');
+<div class="music-player">
 
-    button.classList.add('active');
-}
+<div class="music-cover" id="musicCover"></div>
 
-menuBtns.forEach(btn => {
+<div class="music-controls">
 
-    btn.addEventListener('click', () => {
+<button class="control-btn" id="prevBtn">⏮</button>
 
-        showSection(btn.dataset.target, btn);
+<button class="control-btn" id="playPauseBtn">▶</button>
 
-    });
+<button class="control-btn" id="nextBtn">⏭</button>
 
-});
+</div>
 
-            // 🎵 REPRODUCTOR MÚSICA PERFECCIONADO
-            const audio = document.getElementById('musicPlayer');
-const playBtn = document.getElementById('playPauseBtn');
-const prevBtn = document.getElementById('prevBtn');
-const nextBtn = document.getElementById('nextBtn');
-const cover = document.getElementById('musicCover');
-const title = document.getElementById('songTitle');
+<h3 id="songTitle"></h3>
 
-const songs = [
-    {
-        src: "StreetPoem.mp3",
-        title: "Anuel AA - Street Poem",
-        cover: "https://xatimg.com/image/ERP0zptxiilD.png"
-    },
+<audio id="musicPlayer"></audio>
 
-    {
-        src: "Blessd.mp3",
-        title: "HOLA QUE TAL | BLESSD ❌ MYKE TOWERS",
-        cover: "https://xatimg.com/image/T1lHJlKsEeDR.jpg"
-    },
+</div>
 
-    {
-        src: "BLESSDINSTAGRAM.mp3",
-        title: "INSTAGRAM | BLESSD",
-        cover: "https://xatimg.com/image/CQdC8EBk9t1d.jpg"
-    }
-];
+</section>
 
-let currentSong = 0;
-let isPlaying = false;
+</main>
 
-function loadSong(index) {
+</div>
 
-    audio.src = songs[index].src;
+</div>
 
-    title.textContent = songs[index].title;
+<script>
 
-    // 🔥 cambiar portada automáticamente
-    cover.style.backgroundImage = `url('${songs[index].cover}')`;
+document.addEventListener('DOMContentLoaded',()=>{
 
-}
-// Play
-function playMusic() {
-    audio.play().then(() => {
-        isPlaying = true;
-        cover.classList.add('playing');
-        playBtn.textContent = '⏸';
-    }).catch(() => console.log("Autoplay bloqueado"));
-}
+const menuBtns=document.querySelectorAll('.menu-btn');
+const sections=document.querySelectorAll('.content-section');
 
-// Pause
-function pauseMusic() {
-    audio.pause();
-    isPlaying = false;
-    cover.classList.remove('playing');
-    playBtn.textContent = '▶';
-}
+menuBtns.forEach(btn=>{
 
-// Botón play/pause
-playBtn.addEventListener('click', () => {
-    isPlaying ? pauseMusic() : playMusic();
-});
+    btn.addEventListener('click',()=>{
 
-// Siguiente
-nextBtn.addEventListener('click', () => {
-    currentSong = (currentSong + 1) % songs.length;
-    loadSong(currentSong);
-    playMusic();
-});
-
-// Anterior
-prevBtn.addEventListener('click', () => {
-    currentSong = (currentSong - 1 + songs.length) % songs.length;
-    loadSong(currentSong);
-    playMusic();
-});
-
-// Auto siguiente
-audio.addEventListener('ended', () => {
-    currentSong = (currentSong + 1) % songs.length;
-    loadSong(currentSong);
-    playMusic();
-});
-
-// Inicializar
-loadSong(currentSong);
-
-
-// 🔥 AUTOPLAY REALISTA (cuando el usuario interactúa)
-document.addEventListener('click', () => {
-    if (!isPlaying) playMusic();
-}, { once: true });
-
-audio.muted = true;
-audio.play();
-
-setTimeout(() => {
-    audio.muted = false;
-}, 1000);
-
-audio.muted = true;
-
-audio.play().then(() => {
-    isPlaying = true;
-    cover.classList.add('playing');
-    playBtn.textContent = '⏸';
-
-    // quitar mute después
-    setTimeout(() => {
-        audio.muted = false;
-    }, 1000);
-
-}).catch(() => {
-    console.log("Autoplay bloqueado");
-});
-
-
-            // ✨ Gotas de lluvia
-          const rain = document.getElementById('rain');
-
-for (let i = 0; i < 200; i++) {
-    const drop = document.createElement('div');
-    drop.className = 'drop';
-    drop.style.left = Math.random() * 100 + '%';
-    drop.style.animationDuration = (Math.random() * 1 + 0.5) + 's';
-    drop.style.animationDelay = Math.random() * 2 + 's';
-    rain.appendChild(drop);
-}
+        sections.forEach(sec=>{
+            sec.classList.remove('active');
         });
 
-     
-document.addEventListener('contextmenu', function(e) {
-    e.preventDefault();
+        menuBtns.forEach(b=>{
+            b.classList.remove('active');
+        });
+
+        document.getElementById(btn.dataset.target)
+        .classList.add('active');
+
+        btn.classList.add('active');
+
+    });
+
 });
 
-const lightning = document.getElementById('lightning');
+const audio=document.getElementById('musicPlayer');
+const playBtn=document.getElementById('playPauseBtn');
+const prevBtn=document.getElementById('prevBtn');
+const nextBtn=document.getElementById('nextBtn');
+const cover=document.getElementById('musicCover');
+const title=document.getElementById('songTitle');
 
-function flashLightning() {
-    lightning.style.opacity = 0.8;
+const songs=[
 
-    setTimeout(() => {
-        lightning.style.opacity = 0;
-    }, 100);
+{
+    src:'StreetPoem.mp3',
+    title:'Anuel AA - Street Poem',
+    cover:'https://xatimg.com/image/ERP0zptxiilD.png'
+},
 
-    // segundo flash (realista)
-    setTimeout(() => {
-        lightning.style.opacity = 0.6;
-        setTimeout(() => {
-            lightning.style.opacity = 0;
-        }, 80);
-    }, 150);
+{
+    src:'Blessd.mp3',
+    title:'Blessd',
+    cover:'https://xatimg.com/image/T1lHJlKsEeDR.jpg'
+},
+
+{
+    src:'BLESSDINSTAGRAM.mp3',
+    title:'Instagram',
+    cover:'https://xatimg.com/image/CQdC8EBk9t1d.jpg'
 }
 
-// rayos aleatorios
-setInterval(() => {
-    if (Math.random() > 0.7) {
-        flashLightning();
-    }
-}, 2000);
+];
 
-    </script>
+let currentSong=0;
+let isPlaying=false;
+
+function loadSong(index){
+
+    audio.src=songs[index].src;
+
+    title.textContent=songs[index].title;
+
+    cover.style.backgroundImage=
+    `url('${songs[index].cover}')`;
+
+}
+
+function playMusic(){
+
+    audio.play();
+
+    isPlaying=true;
+
+    playBtn.textContent='⏸';
+
+    cover.classList.add('playing');
+
+}
+
+function pauseMusic(){
+
+    audio.pause();
+
+    isPlaying=false;
+
+    playBtn.textContent='▶';
+
+    cover.classList.remove('playing');
+
+}
+
+playBtn.addEventListener('click',()=>{
+
+    if(isPlaying){
+        pauseMusic();
+    }else{
+        playMusic();
+    }
+
+});
+
+nextBtn.addEventListener('click',()=>{
+
+    currentSong=(currentSong+1)%songs.length;
+
+    loadSong(currentSong);
+
+    playMusic();
+
+});
+
+prevBtn.addEventListener('click',()=>{
+
+    currentSong=(currentSong-1+songs.length)%songs.length;
+
+    loadSong(currentSong);
+
+    playMusic();
+
+});
+
+audio.addEventListener('ended',()=>{
+
+    currentSong=(currentSong+1)%songs.length;
+
+    loadSong(currentSong);
+
+    playMusic();
+
+});
+
+loadSong(currentSong);
+
+const rain=document.getElementById('rain');
+
+for(let i=0;i<200;i++){
+
+    const drop=document.createElement('div');
+
+    drop.className='drop';
+
+    drop.style.left=Math.random()*100+'%';
+
+    drop.style.animationDuration=
+    (Math.random()*1+.5)+'s';
+
+    drop.style.animationDelay=
+    Math.random()*2+'s';
+
+    rain.appendChild(drop);
+
+}
+
+});
+
+</script>
+
 </body>
 </html>
+```
