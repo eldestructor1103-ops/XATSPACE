@@ -716,18 +716,19 @@ Ingeniero de Sistemas.<br>
             const menuBtns = document.querySelectorAll('.menu-btn');
             const sections = document.querySelectorAll('.content-section');
 
-            function showSection(targetId) {
-                sections.forEach(s => s.classList.remove('active'));
-                menuBtns.forEach(b => b.classList.remove('active'));
-                document.getElementById(targetId)?.classList.add('active');
-                event.target.classList.add('active');
-            }
+function showSection(targetId, button) {
+    sections.forEach(s => s.classList.remove('active'));
+    menuBtns.forEach(b => b.classList.remove('active'));
 
-            menuBtns.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    showSection(btn.dataset.target);
-                });
-            });
+    document.getElementById(targetId).classList.add('active');
+    button.classList.add('active');
+}
+
+menuBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        showSection(btn.dataset.target, btn);
+    });
+});
 
             // 🎵 REPRODUCTOR MÚSICA PERFECCIONADO
             const audio = document.getElementById('musicPlayer');
