@@ -322,7 +322,7 @@ body {
         width: 220px; /* 🔥 tamaño */
         height: 220px; /* 🔥 tamaño */
         border-radius: 50%; /* 🔥 vuelve totalmente circular */
-        background: #000000 url('https://xatimg.com/image/ERP0zptxiilD.png') center/cover no-repeat;
+        background: #000;
         margin: 0 auto 30px;
         display: flex;
         align-items: center;
@@ -741,15 +741,18 @@ const songs = [
     {
         src: "StreetPoem.mp3",
         title: "Anuel AA - Street Poem"
+        cover: "https://xatimg.com/image/ERP0zptxiilD.png"
     },
     
     {
         src: "Blessd.mp3",
         title: "HOLA QUE TAL | BLESSD ❌ MYKE TOWERS"
+        cover: "https://xatimg.com/image/ERP0zptxiilD.png"
     },
     {
         src: "BLESSDINSTAGRAM.mp3",
         title: "INSTAGRAM | BLESSD"
+        cover: "https://xatimg.com/image/ERP0zptxiilD.png"
     }
 ];
 
@@ -760,6 +763,11 @@ let isPlaying = false;
 function loadSong(index) {
     audio.src = songs[index].src;
     title.textContent = songs[index].title;
+
+        // 🔥 cambiar imagen del disco
+    cover.style.background = `
+        #000 url('${songs[index].cover}') center/cover no-repeat
+    `;
 }
 
 // Play
