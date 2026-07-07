@@ -530,6 +530,36 @@ body {
     transform: scale(1.05);
     box-shadow: 0 15px 40px rgba(255,255,255,0.25);
 }
+
+        .about-card{
+    position: relative;
+    overflow: hidden;
+    padding: 30px;
+    border-radius: 18px;
+
+    background-image: url("https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExNWoyYjh5Nzd2OG54eGF5NWJtb3A1YXUycjBsbm90YmU2eXh0MnBubSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/xjxAbECu7vjPvzPcxi/giphy.gif");
+    background-size: cover;
+    background-position: center;
+}
+
+/* Capa oscura regulable */
+.about-card::before{
+    content:"";
+    position:absolute;
+    inset:0;
+
+    background:rgba(0,0,0,.60); /* ← CAMBIA ESTE VALOR */
+
+    z-index:1;
+}
+
+/* El texto queda encima */
+.about-card>*{
+    position:relative;
+    z-index:2;
+}
+
+        
 /* EFECTOS BOTONES */
 
     </style>
@@ -575,17 +605,22 @@ body {
                     <div style="display: flex; gap: 30px; align-items: center; flex-wrap: wrap;">
                         </div>
                         
-                        <div>
-                            <h2 style="font-family: 'Dancing Script', cursive; font-size: 28px;">Sobre mí</h2>
-<p>
+                        <div class="about-card">
 
-    </span><br>
-Colombiano.
+    <h2 style="font-family:'Dancing Script', cursive;font-size:28px;">
+        Sobre mí
+    </h2>
+
+    <p>Colombiano.</p>
+
+    <p>24 años.</p>
+
+    <p>Ingeniero de Sistemas.</p>
+
+    <p style="margin-top:15px;font-style:italic;">
+        "Los sueños no tienen fecha de vencimiento, pero sí requieren decisión:
+        piensa en grande, trabaja en silencio y deja que los resultados hablen por ti."
     </p>
-24 años.
-    </p>
-Ingeniero de Sistemas.<br>
-</p>
 
     <p style="margin-top: 15px; font-style: italic;">
         "Los sueños no tienen fecha de vencimiento, pero sí requieren decisión: piensa en grande, trabaja en silencio y deja que los resultados hablen por ti."
