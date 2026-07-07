@@ -117,6 +117,27 @@ body {
             position: relative;
         }
 
+        /* GIF DE FONDO EN LA TARJETA */
+.glass-card::after{
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background: url("https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExNWoyYjh5Nzd2OG54eGF5NWJtb3A1YXUycjBsbm90YmU2eXh0MnBubSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/xjxAbECu7vjPvzPcxi/giphy.gif")
+    center center / cover no-repeat;
+
+    opacity: 0.20;   /* ← Cambia este valor para hacerlo más o menos visible */
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* TODO EL CONTENIDO QUEDA ENCIMA DEL GIF */
+.sidebar,
+.content-area{
+    position: relative;
+    z-index: 1;
+}
+
         .lightning-bolt {
     position: fixed;
     top: 0;
