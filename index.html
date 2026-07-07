@@ -551,61 +551,6 @@ body {
     transform: scale(1.05);
     box-shadow: 0 15px 40px rgba(255,255,255,0.25);
 }
-
-/* PANTALLA DE BIENVENIDA */
-#welcomeScreen{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.85);
-    backdrop-filter:blur(15px);
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    z-index:99999;
-}
-
-.welcome-box{
-    text-align:center;
-    background:rgba(255,255,255,.08);
-    padding:50px;
-    border-radius:20px;
-    border:1px solid rgba(255,255,255,.2);
-    backdrop-filter:blur(20px);
-    box-shadow:0 0 40px rgba(255,255,255,.15);
-}
-
-.welcome-box h1{
-    font-family:'Dancing Script', cursive;
-    font-size:55px;
-    color:white;
-    margin-bottom:10px;
-}
-
-.welcome-box p{
-    color:#ddd;
-    margin-bottom:30px;
-}
-
-#enterBtn{
-    padding:15px 45px;
-    border:none;
-    border-radius:50px;
-    cursor:pointer;
-    font-size:18px;
-    font-weight:bold;
-
-    color:white;
-    background:rgba(255,255,255,.15);
-
-    transition:.3s;
-}
-
-#enterBtn:hover{
-    transform:scale(1.08);
-    background:rgba(255,255,255,.30);
-    box-shadow:0 0 25px rgba(255,255,255,.4);
-}
-        
 /* EFECTOS BOTONES */
 
     </style>
@@ -966,24 +911,6 @@ setInterval(() => {
         flashLightning();
     }
 }, 2000);
-        
-/*BOTON DE ENTRAR INICIO */
-        const enterBtn = document.getElementById("enterBtn");
-const welcome = document.getElementById("welcomeScreen");
-
-enterBtn.addEventListener("click",()=>{
-
-    welcome.style.opacity="0";
-    welcome.style.transition=".6s";
-
-    setTimeout(()=>{
-        welcome.style.display="none";
-    },600);
-
-    // Iniciar música
-    playMusic();
-
-});
 
     </script>
 </body>
